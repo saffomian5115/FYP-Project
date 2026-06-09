@@ -1,0 +1,8 @@
+.env 
+face_models/
+gemini_keys.json
+node_modules/
+dist/
+*.log
+*.env
+venv/
