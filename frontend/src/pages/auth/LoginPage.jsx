@@ -87,8 +87,8 @@ export default function LoginPage() {
 
   // Quick login presets
   const quickLogins = [
-    { label: "Admin",   icon: ShieldCheck,   email: "admin@bzu.edu.pk",              pass: "Admin@123",   color: "rgba(155,89,182,0.15)", border: "rgba(155,89,182,0.3)", text: "#9b59b6" },
-    { label: "Teacher", icon: BookOpen,      email: "Mr.GhulamGhos@bzu.edu.pk",          pass: "Teacher@123", color: "rgba(62,207,142,0.12)", border: "rgba(62,207,142,0.3)", text: "#22a06b" },
+    { label: "Admin",   icon: ShieldCheck,   email: "usman.admin@bzu.edu.pk",              pass: "Admin@123",   color: "rgba(155,89,182,0.15)", border: "rgba(155,89,182,0.3)", text: "#9b59b6" },
+    { label: "Teacher", icon: BookOpen,      email: "ghulam.ghos@bzu.edu.pk",          pass: "Teacher@123", color: "rgba(62,207,142,0.12)", border: "rgba(62,207,142,0.3)", text: "#22a06b" },
     { label: "Student", icon: GraduationCap, email: "sarfraz@student.bzu.edu.pk", pass: "Student@123", color: "rgba(91,138,240,0.12)", border: "rgba(91,138,240,0.3)", text: "#5b8af0" },
   ];
 

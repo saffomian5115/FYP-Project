@@ -3,11 +3,16 @@ SET FOREIGN_KEY_CHECKS = 0;
 
 USE AI_Driven_Smart_LMS;
 
+-- =====================================================
+-- SEED 01: DEPARTMENTS
+-- =====================================================
+
 INSERT INTO departments (id, name, code, description, head_of_department) VALUES
-(1, 'Information Technology', 'IT', 'Department of Information Technology', NULL),
-(2, 'Computer Science', 'CS', 'Department of Computer Science', NULL),
-(3, 'Business Administration', 'BBA', 'Department of Business Administration', NULL),
-(4, 'Mathematics', 'MATH', 'Department of Mathematics', NULL);
+(1, 'Information Technology', 'IT',   'Department of Information Technology', NULL),
+(2, 'Computer Science',       'CS',   'Department of Computer Science',       NULL),
+(3, 'Business Administration','BBA',  'Department of Business Administration',NULL),
+(4, 'Mathematics',            'MATH', 'Department of Mathematics',            NULL);
+
 -- =====================================================
 -- SEED 02: PROGRAMS
 -- =====================================================
@@ -18,56 +23,60 @@ INSERT INTO programs (id, name, code, department_id, duration_years, total_credi
 (2, 'Bachelor of Science in Computer Science',       'BSCS', 2, 4, 130, 'BS'),
 (3, 'Bachelor of Business Administration',           'BBA',  3, 4, 120, 'BBA'),
 (4, 'Associate Degree in Information Technology',    'ADIT', 1, 2, 66,  'AD');
+
 -- =====================================================
 -- SEED 03: SEMESTERS
 -- =====================================================
 USE AI_Driven_Smart_LMS;
 
 INSERT INTO semesters (id, name, code, start_date, end_date, is_active, registration_start, registration_end, add_drop_last_date) VALUES
-(1, 'Fall 2023',   'FALL-2023',   '2023-09-01', '2024-01-31', FALSE, '2023-08-15', '2023-09-10', '2023-09-20'),
-(2, 'Spring 2024', 'SPRING-2024', '2024-02-01', '2024-06-30', FALSE, '2024-01-15', '2024-02-10', '2024-02-20'),
+(1, 'Fall 2021',   'FALL-2021',   '2021-09-01', '2022-01-31', FALSE, '2021-08-15', '2021-09-10', '2021-09-20'),
+(2, 'Spring 2022', 'SPRING-2022', '2022-02-01', '2022-06-30', FALSE, '2022-01-15', '2022-02-10', '2022-02-20'),
 (3, 'Fall 2024',   'FALL-2024',   '2024-09-01', '2025-01-31', FALSE, '2024-08-15', '2024-09-10', '2024-09-20'),
 (4, 'Spring 2025', 'SPRING-2025', '2025-02-01', '2025-06-30', TRUE,  '2025-01-15', '2025-02-10', '2025-02-20');
+
 -- =====================================================
 -- SEED 04: COURSES
 -- =====================================================
 USE AI_Driven_Smart_LMS;
 
 INSERT INTO courses (id, code, name, credit_hours, lecture_hours, lab_hours, description, department_id, program_id, semester_level, is_elective) VALUES
--- BSIT Courses
-(1,  'IT-101', 'Introduction to Computing',          3, 3, 0, 'Basic computing concepts',              1, 1, 1, FALSE),
-(2,  'IT-102', 'Programming Fundamentals',           3, 2, 2, 'Introduction to programming with C++',  1, 1, 1, FALSE),
-(3,  'IT-103', 'Calculus and Analytical Geometry',   3, 3, 0, 'Mathematical foundations',              4, 1, 1, FALSE),
-(4,  'IT-201', 'Object Oriented Programming',        3, 2, 2, 'OOP concepts using Java',               1, 1, 2, FALSE),
-(5,  'IT-202', 'Data Structures and Algorithms',     3, 2, 2, 'Core data structures',                  1, 1, 2, FALSE),
-(6,  'IT-203', 'Database Systems',                   3, 2, 2, 'Relational database design and SQL',    1, 1, 3, FALSE),
-(7,  'IT-301', 'Web Technologies',                   3, 2, 2, 'HTML, CSS, JavaScript, PHP',            1, 1, 3, FALSE),
-(8,  'IT-302', 'Computer Networks',                  3, 3, 0, 'Networking fundamentals',               1, 1, 4, FALSE),
-(9,  'IT-303', 'Software Engineering',               3, 3, 0, 'SDLC and software processes',           1, 1, 4, FALSE),
-(10, 'IT-401', 'Artificial Intelligence',            3, 3, 0, 'AI fundamentals and applications',      1, 1, 5, FALSE),
-(11, 'IT-402', 'Machine Learning',                   3, 2, 2, 'ML algorithms and implementation',      1, 1, 6, TRUE),
-(12, 'IT-403', 'Final Year Project I',               3, 0, 6, 'Capstone project part 1',               1, 1, 7, FALSE),
+-- BSIT Core Courses (earlier semesters)
+(1,  'IT-101', 'Introduction to Computing',           3, 3, 0, 'Basic computing concepts',                        1, 1, 1, FALSE),
+(2,  'IT-102', 'Programming Fundamentals',            3, 2, 2, 'Introduction to programming with C++',            1, 1, 1, FALSE),
+(3,  'IT-103', 'Calculus and Analytical Geometry',    3, 3, 0, 'Mathematical foundations',                        4, 1, 1, FALSE),
+(4,  'IT-201', 'Data Structures and Algorithms',      3, 2, 2, 'Core data structures',                            1, 1, 3, FALSE),
+(5,  'IT-202', 'Computer Networks',                   3, 3, 0, 'Networking fundamentals',                         1, 1, 4, FALSE),
+(6,  'IT-203', 'Web Technologies',                    3, 2, 2, 'HTML, CSS, JavaScript, PHP',                      1, 1, 5, FALSE),
+
+-- BSIT 8th Semester Courses (your class subjects)
+(7,  'IT-401', 'Database Administration',             3, 2, 2, 'Advanced database administration, tuning & DBA skills', 1, 1, 8, FALSE),
+(8,  'IT-402', 'OOP with Java',                       3, 2, 2, 'Object-Oriented Programming concepts using Java', 1, 1, 8, FALSE),
+(9,  'IT-403', 'Software Project Management',         3, 3, 0, 'Agile, Scrum and project management methodologies',1, 1, 8, FALSE),
+(10, 'IT-404', 'Final Year Project',                  3, 0, 6, 'Capstone final year project',                    1, 1, 8, FALSE),
 
 -- BSCS Courses
-(13, 'CS-101', 'Programming in C',                   3, 2, 2, 'C programming language',                2, 2, 1, FALSE),
-(14, 'CS-201', 'Discrete Mathematics',               3, 3, 0, 'Logic and discrete structures',         4, 2, 2, FALSE),
-(15, 'CS-301', 'Operating Systems',                  3, 3, 0, 'OS concepts and design',                2, 2, 3, FALSE),
+(11, 'CS-101', 'Programming in C',                    3, 2, 2, 'C programming language',                         2, 2, 1, FALSE),
+(12, 'CS-301', 'Operating Systems',                   3, 3, 0, 'OS concepts and design',                         2, 2, 5, FALSE);
 
--- BBA Courses
-(16, 'BBA-101', 'Principles of Management',          3, 3, 0, 'Management fundamentals',               3, 3, 1, FALSE),
-(17, 'BBA-201', 'Financial Accounting',              3, 3, 0, 'Basic accounting principles',           3, 3, 2, FALSE);
-
--- ── CLOs for IT-101 ──────────────────────────────────
+-- ── CLOs for Database Administration ─────────────────
 INSERT INTO course_clos (course_id, clo_number, description, domain, level) VALUES
-(1, 'CLO-1', 'Understand basic computing concepts',         'Cognitive', 'Knowledge'),
-(1, 'CLO-2', 'Identify hardware and software components',   'Cognitive', 'Comprehension'),
-(1, 'CLO-3', 'Use basic office productivity tools',         'Psychomotor', 'Application');
+(7, 'CLO-1', 'Understand database architecture and administration tasks',       'Cognitive',   'Knowledge'),
+(7, 'CLO-2', 'Perform database backup, recovery, and performance tuning',       'Psychomotor', 'Application'),
+(7, 'CLO-3', 'Implement user management and security in database systems',      'Psychomotor', 'Application');
 
--- ── CLOs for IT-102 ──────────────────────────────────
+-- ── CLOs for OOP with Java ────────────────────────────
 INSERT INTO course_clos (course_id, clo_number, description, domain, level) VALUES
-(2, 'CLO-1', 'Write basic programs in C++',                 'Psychomotor', 'Application'),
-(2, 'CLO-2', 'Apply control structures and loops',          'Cognitive', 'Application'),
-(2, 'CLO-3', 'Implement functions and arrays',              'Psychomotor', 'Application');
+(8, 'CLO-1', 'Apply object-oriented principles: encapsulation, inheritance, polymorphism', 'Cognitive',   'Application'),
+(8, 'CLO-2', 'Develop Java applications using classes, interfaces, and exceptions',        'Psychomotor', 'Application'),
+(8, 'CLO-3', 'Design and implement GUI applications using Java Swing or JavaFX',           'Psychomotor', 'Synthesis');
+
+-- ── CLOs for Software Project Management ─────────────
+INSERT INTO course_clos (course_id, clo_number, description, domain, level) VALUES
+(9, 'CLO-1', 'Understand Agile and Scrum methodologies',                        'Cognitive',   'Comprehension'),
+(9, 'CLO-2', 'Create project plans, risk assessments and cost estimates',       'Cognitive',   'Application'),
+(9, 'CLO-3', 'Manage software teams and deliver projects on schedule',          'Affective',   'Application');
+
 -- =====================================================
 -- SEED 05: ADMIN USERS
 -- Password for all: Admin@123
@@ -76,7 +85,7 @@ INSERT INTO course_clos (course_id, clo_number, description, domain, level) VALU
 USE AI_Driven_Smart_LMS;
 
 INSERT INTO users (id, roll_number, email, password_hash, role, is_active) VALUES
-(1, NULL, 'admin@bzu.edu.pk',
+(1, NULL, 'usman.admin@bzu.edu.pk',
  '$2b$12$.B0JSpE.0aluBkNcCgcGQOzm2S6tC5hrFQKBfQfcy/RRx/6RBTEuq',
  'admin', TRUE),
 
@@ -89,9 +98,10 @@ INSERT INTO users (id, roll_number, email, password_hash, role, is_active) VALUE
  'admin', TRUE);
 
 INSERT INTO admin_profiles (user_id, employee_id, full_name, designation, phone, email_official, role_type) VALUES
-(1, 'EMP-001', 'Muhammad Sarfraz',    'System Administrator', '0300-1234567', 'admin@bzu.edu.pk',        'admin'),
-(2, 'EMP-002', 'Ahmad Security',      'Security Admin',       '0300-2345678', 'security@bzu.edu.pk',     'security_admin'),
-(3, 'EMP-003', 'Ali Gate Operator',   'Gate Operator',        '0300-3456789', 'gate.operator@bzu.edu.pk','gate_operator');
+(1, 'EMP-001', 'Mr. Usman',        'System Administrator', '0300-1234567', 'usman.admin@bzu.edu.pk',  'admin'),
+(2, 'EMP-002', 'Ahmad Security',   'Security Admin',       '0300-2345678', 'security@bzu.edu.pk',     'security_admin'),
+(3, 'EMP-003', 'Ali Gate Operator','Gate Operator',        '0300-3456789', 'gate.operator@bzu.edu.pk','gate_operator');
+
 -- =====================================================
 -- SEED 06: TEACHERS
 -- Password for all: Teacher@123
@@ -100,37 +110,32 @@ INSERT INTO admin_profiles (user_id, employee_id, full_name, designation, phone,
 USE AI_Driven_Smart_LMS;
 
 INSERT INTO users (id, roll_number, email, password_hash, role, is_active) VALUES
-(4, NULL, 'dr.kamran@bzu.edu.pk',
+(4, NULL, 'ghulam.ghos@bzu.edu.pk',
  '$2b$12$qz6Q0HsJOSUvj2qXLqcVSu0wsHvej5zn78/22BOXMgm2lMMXYgDx6',
  'teacher', TRUE),
 
-(5, NULL, 'ms.ayesha@bzu.edu.pk',
+(5, NULL, 'asif.raza@bzu.edu.pk',
  '$2b$12$qz6Q0HsJOSUvj2qXLqcVSu0wsHvej5zn78/22BOXMgm2lMMXYgDx6',
  'teacher', TRUE),
 
-(6, NULL, 'mr.hassan@bzu.edu.pk',
+(6, NULL, 'aqsa.maam@bzu.edu.pk',
  '$2b$12$qz6Q0HsJOSUvj2qXLqcVSu0wsHvej5zn78/22BOXMgm2lMMXYgDx6',
  'teacher', TRUE),
 
-(7, NULL, 'dr.fatima@bzu.edu.pk',
- '$2b$12$qz6Q0HsJOSUvj2qXLqcVSu0wsHvej5zn78/22BOXMgm2lMMXYgDx6',
- 'teacher', TRUE),
-
-(8, NULL, 'mr.usman@bzu.edu.pk',
+(7, NULL, 'iqra.maam@bzu.edu.pk',
  '$2b$12$qz6Q0HsJOSUvj2qXLqcVSu0wsHvej5zn78/22BOXMgm2lMMXYgDx6',
  'teacher', TRUE);
 
 INSERT INTO teacher_profiles (user_id, employee_id, full_name, designation, qualification, specialization, joining_date, phone, email, cnic) VALUES
-(4, 'TCH-001', 'Dr. Kamran Mehmood',  'Associate Professor', 'PhD Computer Science',   'Artificial Intelligence, Machine Learning', '2015-08-01', '0301-1111111', 'dr.kamran@bzu.edu.pk',  '36302-1111111-1'),
-(5, 'TCH-002', 'Ms. Ayesha Siddiqui', 'Lecturer',            'MS Information Technology', 'Web Development, Databases',             '2019-02-01', '0301-2222222', 'ms.ayesha@bzu.edu.pk',  '36302-2222222-2'),
-(6, 'TCH-003', 'Mr. Hassan Raza',     'Lecturer',            'MS Computer Science',    'Programming, Data Structures',              '2020-09-01', '0301-3333333', 'mr.hassan@bzu.edu.pk',  '36302-3333333-3'),
-(7, 'TCH-004', 'Dr. Fatima Malik',    'Assistant Professor', 'PhD Mathematics',        'Applied Mathematics, Statistics',           '2017-03-01', '0301-4444444', 'dr.fatima@bzu.edu.pk',  '36302-4444444-4'),
-(8, 'TCH-005', 'Mr. Usman Tariq',     'Lecturer',            'MS Software Engineering','Software Engineering, Testing',             '2021-09-01', '0301-5555555', 'mr.usman@bzu.edu.pk',   '36302-5555555-5');
+(4, 'TCH-001', 'Mr. Ghulam Ghos', 'Lecturer',            'MS Information Technology', 'Database Systems, Java Programming',       '2018-09-01', '0301-1111111', 'ghulam.ghos@bzu.edu.pk', '36302-1111111-1'),
+(5, 'TCH-002', 'Mr. Asif Raza',   'Lecturer',            'MS Computer Science',       'Software Engineering, Project Management',  '2019-02-01', '0301-2222222', 'asif.raza@bzu.edu.pk',   '36302-2222222-2'),
+(6, 'TCH-003', 'Ma''am Aqsa',     'Assistant Professor', 'MS Software Engineering',   'Web Technologies, OOP',                    '2017-03-01', '0301-3333333', 'aqsa.maam@bzu.edu.pk',   '36302-3333333-3'),
+(7, 'TCH-004', 'Ma''am Iqra',     'Lecturer',            'MS Data Science',           'Data Analytics, Machine Learning',          '2020-08-01', '0301-4444444', 'iqra.maam@bzu.edu.pk',   '36302-4444444-4');
 
 -- Update Department HODs
 UPDATE departments SET head_of_department = 4 WHERE id = 1;
 UPDATE departments SET head_of_department = 4 WHERE id = 2;
-UPDATE departments SET head_of_department = 7 WHERE id = 4;
+
 -- =====================================================
 -- SEED 07: STUDENTS
 -- Password for all: Student@123
@@ -138,50 +143,33 @@ UPDATE departments SET head_of_department = 7 WHERE id = 4;
 -- =====================================================
 USE AI_Driven_Smart_LMS;
 
+-- BSIT 8th Semester Students (Mr. Ghulam Ghos ki class)
 INSERT INTO users (id, roll_number, email, password_hash, role, is_active) VALUES
--- BSIT 2021 Batch
-(9,  'BSIT-21-01', 'ali.hassan@student.bzu.edu.pk',      '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
-(10, 'BSIT-21-02', 'sara.ahmed@student.bzu.edu.pk',      '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
-(11, 'BSIT-21-03', 'usman.malik@student.bzu.edu.pk',     '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
-(12, 'BSIT-21-04', 'fatima.khan@student.bzu.edu.pk',     '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
-(13, 'BSIT-21-05', 'bilal.qureshi@student.bzu.edu.pk',   '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
-(14, 'BSIT-21-06', 'zara.butt@student.bzu.edu.pk',       '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
-(15, 'BSIT-21-07', 'hamza.riaz@student.bzu.edu.pk',      '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
-(16, 'BSIT-21-08', 'nadia.iqbal@student.bzu.edu.pk',     '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
-(17, 'BSIT-21-09', 'tariq.mehmood@student.bzu.edu.pk',   '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
-(18, 'BSIT-21-10', 'amna.farooq@student.bzu.edu.pk',     '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
-
--- BSIT 2022 Batch
-(19, 'BSIT-22-01', 'omar.sheikh@student.bzu.edu.pk',     '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
-(20, 'BSIT-22-02', 'hina.nawaz@student.bzu.edu.pk',      '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
-(21, 'BSIT-22-03', 'asad.ali@student.bzu.edu.pk',        '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
-(22, 'BSIT-22-04', 'sana.rehman@student.bzu.edu.pk',     '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
-(23, 'BSIT-22-05', 'danish.siddiqui@student.bzu.edu.pk', '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
-
--- BSCS Batch
-(24, 'BSCS-21-01', 'raheel.aslam@student.bzu.edu.pk',    '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
-(25, 'BSCS-21-02', 'mehwish.javed@student.bzu.edu.pk',   '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE);
+(9,  'BSIT-21-01', 'sarfraz@student.bzu.edu.pk',       '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(10, 'BSIT-21-02', 'zain.arain@student.bzu.edu.pk',    '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(11, 'BSIT-21-03', 'moeez.israr@student.bzu.edu.pk',   '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(12, 'BSIT-21-04', 'saba.hafeez@student.bzu.edu.pk',   '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(13, 'BSIT-21-05', 'shamaya@student.bzu.edu.pk',        '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(14, 'BSIT-21-06', 'kinza@student.bzu.edu.pk',          '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(15, 'BSIT-21-07', 'hafsa@student.bzu.edu.pk',          '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(16, 'BSIT-21-08', 'azka@student.bzu.edu.pk',           '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(17, 'BSIT-21-09', 'kashaf@student.bzu.edu.pk',         '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(18, 'BSIT-21-10', 'haiqa@student.bzu.edu.pk',          '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE);
 
 INSERT INTO student_profiles
   (user_id, registration_number, full_name, father_name, date_of_birth, gender, cnic, phone, current_address, city, guardian_phone, guardian_relation)
 VALUES
-(9,  'BZU-IT-2021-001', 'Ali Hassan',         'Hassan Ali',         '2003-03-15', 'male',   '36302-0000001-1', '0311-1000001', 'Street 1, Multan',      'Multan',     '0311-9000001', 'Father'),
-(10, 'BZU-IT-2021-002', 'Sara Ahmed',         'Ahmed Ali',          '2003-05-20', 'female', '36302-0000002-2', '0311-1000002', 'Street 2, Multan',      'Multan',     '0311-9000002', 'Father'),
-(11, 'BZU-IT-2021-003', 'Usman Malik',        'Malik Usman',        '2002-11-10', 'male',   '36302-0000003-3', '0311-1000003', 'Street 3, Multan',      'Multan',     '0311-9000003', 'Father'),
-(12, 'BZU-IT-2021-004', 'Fatima Khan',        'Khan Sahib',         '2003-07-25', 'female', '36302-0000004-4', '0311-1000004', 'Street 4, Lahore',      'Lahore',     '0311-9000004', 'Father'),
-(13, 'BZU-IT-2021-005', 'Bilal Qureshi',      'Qureshi Sahib',      '2002-09-05', 'male',   '36302-0000005-5', '0311-1000005', 'Street 5, Multan',      'Multan',     '0311-9000005', 'Father'),
-(14, 'BZU-IT-2021-006', 'Zara Butt',          'Butt Sahib',         '2003-01-18', 'female', '36302-0000006-6', '0311-1000006', 'Street 6, Sahiwal',     'Sahiwal',    '0311-9000006', 'Father'),
-(15, 'BZU-IT-2021-007', 'Hamza Riaz',         'Riaz Ahmed',         '2003-06-30', 'male',   '36302-0000007-7', '0311-1000007', 'Street 7, Multan',      'Multan',     '0311-9000007', 'Father'),
-(16, 'BZU-IT-2021-008', 'Nadia Iqbal',        'Iqbal Sahib',        '2002-12-12', 'female', '36302-0000008-8', '0311-1000008', 'Street 8, Bahawalpur',  'Bahawalpur', '0311-9000008', 'Father'),
-(17, 'BZU-IT-2021-009', 'Tariq Mehmood',      'Mehmood Sahib',      '2003-04-22', 'male',   '36302-0000009-9', '0311-1000009', 'Street 9, Multan',      'Multan',     '0311-9000009', 'Father'),
-(18, 'BZU-IT-2021-010', 'Amna Farooq',        'Farooq Ahmed',       '2003-08-14', 'female', '36302-0000010-0', '0311-1000010', 'Street 10, Vehari',     'Vehari',     '0311-9000010', 'Father'),
-(19, 'BZU-IT-2022-001', 'Omar Sheikh',        'Sheikh Rashid',      '2004-02-28', 'male',   '36302-0000011-1', '0311-1000011', 'Street 11, Multan',     'Multan',     '0311-9000011', 'Father'),
-(20, 'BZU-IT-2022-002', 'Hina Nawaz',         'Nawaz Sahib',        '2004-07-15', 'female', '36302-0000012-2', '0311-1000012', 'Street 12, Multan',     'Multan',     '0311-9000012', 'Father'),
-(21, 'BZU-IT-2022-003', 'Asad Ali',           'Ali Khan',           '2004-03-10', 'male',   '36302-0000013-3', '0311-1000013', 'Street 13, Khanewal',   'Khanewal',   '0311-9000013', 'Father'),
-(22, 'BZU-IT-2022-004', 'Sana Rehman',        'Rehman Sahib',       '2004-09-05', 'female', '36302-0000014-4', '0311-1000014', 'Street 14, Multan',     'Multan',     '0311-9000014', 'Father'),
-(23, 'BZU-IT-2022-005', 'Danish Siddiqui',    'Siddiqui Sahib',     '2004-11-20', 'male',   '36302-0000015-5', '0311-1000015', 'Street 15, Lodhran',    'Lodhran',    '0311-9000015', 'Father'),
-(24, 'BZU-CS-2021-001', 'Raheel Aslam',       'Aslam Sahib',        '2003-05-18', 'male',   '36302-0000016-6', '0311-1000016', 'Street 16, Multan',     'Multan',     '0311-9000016', 'Father'),
-(25, 'BZU-CS-2021-002', 'Mehwish Javed',      'Javed Sahib',        '2003-10-25', 'female', '36302-0000017-7', '0311-1000017', 'Street 17, Multan',     'Multan',     '0311-9000017', 'Father');
+(9,  'BZU-IT-2021-001', 'Sarfraz',      'Muhammad Sarfraz',   '2003-03-15', 'male',   '36302-0000001-1', '0311-1000001', 'Street 1, Multan', 'Multan', '0311-9000001', 'Father'),
+(10, 'BZU-IT-2021-002', 'Zain Arain',   'Arain Sahib',        '2003-05-20', 'male',   '36302-0000002-2', '0311-1000002', 'Street 2, Multan', 'Multan', '0311-9000002', 'Father'),
+(11, 'BZU-IT-2021-003', 'Moeez Israr',  'Israr Ahmed',        '2002-11-10', 'male',   '36302-0000003-3', '0311-1000003', 'Street 3, Multan', 'Multan', '0311-9000003', 'Father'),
+(12, 'BZU-IT-2021-004', 'Saba Hafeez',  'Hafeez Ahmad',       '2003-07-25', 'female', '36302-0000004-4', '0311-1000004', 'Street 4, Multan', 'Multan', '0311-9000004', 'Father'),
+(13, 'BZU-IT-2021-005', 'Shamaya',       'Shamaya Sahib',     '2003-01-18', 'female', '36302-0000005-5', '0311-1000005', 'Street 5, Multan', 'Multan', '0311-9000005', 'Father'),
+(14, 'BZU-IT-2021-006', 'Kinza',         'Kinza Sahib',       '2003-06-30', 'female', '36302-0000006-6', '0311-1000006', 'Street 6, Multan', 'Multan', '0311-9000006', 'Father'),
+(15, 'BZU-IT-2021-007', 'Hafsa',         'Hafsa Sahib',       '2002-12-12', 'female', '36302-0000007-7', '0311-1000007', 'Street 7, Multan', 'Multan', '0311-9000007', 'Father'),
+(16, 'BZU-IT-2021-008', 'Azka',          'Azka Sahib',        '2003-04-22', 'female', '36302-0000008-8', '0311-1000008', 'Street 8, Multan', 'Multan', '0311-9000008', 'Father'),
+(17, 'BZU-IT-2021-009', 'Kashaf',        'Kashaf Sahib',      '2003-08-14', 'female', '36302-0000009-9', '0311-1000009', 'Street 9, Multan', 'Multan', '0311-9000009', 'Father'),
+(18, 'BZU-IT-2021-010', 'Haiqa',         'Haiqa Sahib',       '2003-02-28', 'female', '36302-0000010-0', '0311-1000010', 'Street 10, Multan','Multan', '0311-9000010', 'Father');
+
 -- =====================================================
 -- SEED 08: STUDENT PROGRAM ENROLLMENTS
 -- =====================================================
@@ -190,166 +178,197 @@ USE AI_Driven_Smart_LMS;
 INSERT INTO student_program_enrollment
   (student_id, program_id, batch_year, enrollment_semester_id, current_semester, status, advisor_id, enrollment_date, expected_graduation)
 VALUES
--- BSIT 2021 Batch → Semester 8 (Final Year)
+-- BSIT 2021 Batch → Semester 8 (Final Year) -- All 10 students under Mr. Ghulam Ghos
 (9,  1, 2021, 1, 8, 'active', 4, '2021-09-01', '2025-06-30'),
 (10, 1, 2021, 1, 8, 'active', 4, '2021-09-01', '2025-06-30'),
-(11, 1, 2021, 1, 8, 'active', 5, '2021-09-01', '2025-06-30'),
-(12, 1, 2021, 1, 8, 'active', 5, '2021-09-01', '2025-06-30'),
-(13, 1, 2021, 1, 7, 'active', 4, '2021-09-01', '2025-06-30'),
-(14, 1, 2021, 1, 7, 'active', 4, '2021-09-01', '2025-06-30'),
-(15, 1, 2021, 1, 8, 'active', 6, '2021-09-01', '2025-06-30'),
-(16, 1, 2021, 1, 8, 'active', 6, '2021-09-01', '2025-06-30'),
-(17, 1, 2021, 1, 7, 'active', 5, '2021-09-01', '2025-06-30'),
-(18, 1, 2021, 1, 8, 'active', 5, '2021-09-01', '2025-06-30'),
+(11, 1, 2021, 1, 8, 'active', 4, '2021-09-01', '2025-06-30'),
+(12, 1, 2021, 1, 8, 'active', 4, '2021-09-01', '2025-06-30'),
+(13, 1, 2021, 1, 8, 'active', 4, '2021-09-01', '2025-06-30'),
+(14, 1, 2021, 1, 8, 'active', 4, '2021-09-01', '2025-06-30'),
+(15, 1, 2021, 1, 8, 'active', 4, '2021-09-01', '2025-06-30'),
+(16, 1, 2021, 1, 8, 'active', 4, '2021-09-01', '2025-06-30'),
+(17, 1, 2021, 1, 8, 'active', 4, '2021-09-01', '2025-06-30'),
+(18, 1, 2021, 1, 8, 'active', 4, '2021-09-01', '2025-06-30');
 
--- BSIT 2022 Batch → Semester 6
-(19, 1, 2022, 2, 6, 'active', 4, '2022-09-01', '2026-06-30'),
-(20, 1, 2022, 2, 6, 'active', 4, '2022-09-01', '2026-06-30'),
-(21, 1, 2022, 2, 6, 'active', 5, '2022-09-01', '2026-06-30'),
-(22, 1, 2022, 2, 6, 'active', 5, '2022-09-01', '2026-06-30'),
-(23, 1, 2022, 2, 6, 'active', 6, '2022-09-01', '2026-06-30'),
-
--- BSCS 2021 Batch
-(24, 2, 2021, 1, 8, 'active', 4, '2021-09-01', '2025-06-30'),
-(25, 2, 2021, 1, 8, 'active', 4, '2021-09-01', '2025-06-30');
 -- =====================================================
 -- SEED 09: COURSE OFFERINGS + ENROLLMENTS
 -- =====================================================
 USE AI_Driven_Smart_LMS;
 
 -- ── Course Offerings (Spring 2025 = semester_id 4) ──
+-- Mr. Ghulam Ghos teaches Database Administration (offering 1) and OOP with Java (offering 2)
+-- Mr. Asif Raza teaches Software Project Management (offering 3)
+-- Ma'am Aqsa teaches Web Technologies elective (offered as offering 4)
 INSERT INTO course_offerings
   (id, course_id, semester_id, instructor_id, section, max_students, enrolled_students, room_number, schedule_json, is_active)
 VALUES
-(1,  7,  4, 5, 'A', 40, 10, 'IT-101', '[{"day":"monday","start_time":"08:00","end_time":"09:30"},{"day":"wednesday","start_time":"08:00","end_time":"09:30"}]', TRUE),
-(2,  8,  4, 6, 'A', 40, 10, 'IT-102', '[{"day":"tuesday","start_time":"10:00","end_time":"11:30"},{"day":"thursday","start_time":"10:00","end_time":"11:30"}]', TRUE),
-(3,  9,  4, 8, 'A', 40, 5,  'IT-103', '[{"day":"monday","start_time":"11:00","end_time":"12:30"},{"day":"friday","start_time":"11:00","end_time":"12:30"}]',   TRUE),
-(4,  10, 4, 4, 'A', 30, 5,  'IT-201', '[{"day":"wednesday","start_time":"02:00","end_time":"03:30"},{"day":"friday","start_time":"02:00","end_time":"03:30"}]', TRUE),
-(5,  5,  4, 6, 'B', 40, 5,  'IT-104', '[{"day":"tuesday","start_time":"08:00","end_time":"09:30"},{"day":"thursday","start_time":"08:00","end_time":"09:30"}]', TRUE);
-
+(1, 7,  4, 4, 'A', 40, 10, 'IT-301', '[{"day":"monday","start_time":"08:00","end_time":"09:30"},{"day":"wednesday","start_time":"08:00","end_time":"09:30"}]', TRUE),
+(2, 8,  4, 4, 'A', 40, 10, 'IT-302', '[{"day":"tuesday","start_time":"10:00","end_time":"11:30"},{"day":"thursday","start_time":"10:00","end_time":"11:30"}]', TRUE),
+(3, 9,  4, 5, 'A', 40, 10, 'IT-303', '[{"day":"monday","start_time":"11:00","end_time":"12:30"},{"day":"friday","start_time":"11:00","end_time":"12:30"}]',   TRUE),
+(4, 10, 4, 6, 'A', 40, 10, 'IT-304', '[{"day":"wednesday","start_time":"02:00","end_time":"03:30"},{"day":"friday","start_time":"02:00","end_time":"03:30"}]', TRUE);
 
 -- ── Course Enrollments ───────────────────────────────
--- Offering 1 (Web Technologies) - BSIT 2022 students
-INSERT INTO enrollments (student_id, offering_id, status, is_approved, advisor_approval_requested) VALUES
-(19, 1, 'enrolled', TRUE,  TRUE),
-(20, 1, 'enrolled', TRUE,  TRUE),
-(21, 1, 'enrolled', TRUE,  TRUE),
-(22, 1, 'enrolled', TRUE,  TRUE),
-(23, 1, 'enrolled', TRUE,  TRUE),
--- BSIT 2021 some students
-(9,  1, 'enrolled', TRUE,  TRUE),
-(10, 1, 'enrolled', TRUE,  TRUE),
-(11, 1, 'enrolled', TRUE,  TRUE),
-(12, 1, 'enrolled', TRUE,  TRUE),
-(13, 1, 'enrolled', TRUE,  TRUE);
+-- All 10 students enrolled in all 4 offerings
 
--- Offering 2 (Computer Networks) - BSIT students
+-- Offering 1 (Database Administration) - Mr. Ghulam Ghos
+INSERT INTO enrollments (student_id, offering_id, status, is_approved, advisor_approval_requested) VALUES
+(9,  1, 'enrolled', TRUE, TRUE),
+(10, 1, 'enrolled', TRUE, TRUE),
+(11, 1, 'enrolled', TRUE, TRUE),
+(12, 1, 'enrolled', TRUE, TRUE),
+(13, 1, 'enrolled', TRUE, TRUE),
+(14, 1, 'enrolled', TRUE, TRUE),
+(15, 1, 'enrolled', TRUE, TRUE),
+(16, 1, 'enrolled', TRUE, TRUE),
+(17, 1, 'enrolled', TRUE, TRUE),
+(18, 1, 'enrolled', TRUE, TRUE);
+
+-- Offering 2 (OOP with Java) - Mr. Ghulam Ghos
 INSERT INTO enrollments (student_id, offering_id, status, is_approved, advisor_approval_requested) VALUES
 (9,  2, 'enrolled', TRUE, TRUE),
 (10, 2, 'enrolled', TRUE, TRUE),
 (11, 2, 'enrolled', TRUE, TRUE),
+(12, 2, 'enrolled', TRUE, TRUE),
+(13, 2, 'enrolled', TRUE, TRUE),
 (14, 2, 'enrolled', TRUE, TRUE),
 (15, 2, 'enrolled', TRUE, TRUE),
 (16, 2, 'enrolled', TRUE, TRUE),
 (17, 2, 'enrolled', TRUE, TRUE),
-(18, 2, 'enrolled', TRUE, TRUE),
-(19, 2, 'enrolled', TRUE, TRUE),
-(20, 2, 'enrolled', TRUE, TRUE);
+(18, 2, 'enrolled', TRUE, TRUE);
 
--- Offering 3 (Software Engineering) - Mixed
+-- Offering 3 (Software Project Management) - Mr. Asif Raza
 INSERT INTO enrollments (student_id, offering_id, status, is_approved, advisor_approval_requested) VALUES
 (9,  3, 'enrolled', TRUE, TRUE),
 (10, 3, 'enrolled', TRUE, TRUE),
+(11, 3, 'enrolled', TRUE, TRUE),
+(12, 3, 'enrolled', TRUE, TRUE),
 (13, 3, 'enrolled', TRUE, TRUE),
 (14, 3, 'enrolled', TRUE, TRUE),
-(15, 3, 'enrolled', TRUE, TRUE);
+(15, 3, 'enrolled', TRUE, TRUE),
+(16, 3, 'enrolled', TRUE, TRUE),
+(17, 3, 'enrolled', TRUE, TRUE),
+(18, 3, 'enrolled', TRUE, TRUE);
 
--- Offering 4 (Artificial Intelligence) - Final Year
+-- Offering 4 (Final Year Project) - Ma'am Aqsa
 INSERT INTO enrollments (student_id, offering_id, status, is_approved, advisor_approval_requested) VALUES
 (9,  4, 'enrolled', TRUE, TRUE),
+(10, 4, 'enrolled', TRUE, TRUE),
 (11, 4, 'enrolled', TRUE, TRUE),
+(12, 4, 'enrolled', TRUE, TRUE),
+(13, 4, 'enrolled', TRUE, TRUE),
+(14, 4, 'enrolled', TRUE, TRUE),
 (15, 4, 'enrolled', TRUE, TRUE),
-(18, 4, 'enrolled', TRUE, TRUE),
-(24, 4, 'enrolled', TRUE, TRUE);
+(16, 4, 'enrolled', TRUE, TRUE),
+(17, 4, 'enrolled', TRUE, TRUE),
+(18, 4, 'enrolled', TRUE, TRUE);
+
 -- =====================================================
 -- SEED 10: LECTURE SESSIONS + ATTENDANCE
 -- =====================================================
 USE AI_Driven_Smart_LMS;
 
--- ── Lecture Sessions (Offering 1 - Web Technologies) ─
+-- ── Lecture Sessions (Offering 1 - Database Administration) ─
 INSERT INTO lecture_sessions
   (id, offering_id, session_date, start_time, end_time, topic, session_type, attendance_marked, marked_by, marked_at)
 VALUES
-(1,  1, '2025-02-03', '08:00', '09:30', 'Introduction to Web Technologies', 'lecture', TRUE, 5, '2025-02-03 09:35:00'),
-(2,  1, '2025-02-05', '08:00', '09:30', 'HTML Basics',                      'lecture', TRUE, 5, '2025-02-05 09:35:00'),
-(3,  1, '2025-02-10', '08:00', '09:30', 'CSS Fundamentals',                 'lecture', TRUE, 5, '2025-02-10 09:35:00'),
-(4,  1, '2025-02-12', '08:00', '09:30', 'CSS Layouts and Flexbox',          'lecture', TRUE, 5, '2025-02-12 09:35:00'),
-(5,  1, '2025-02-17', '08:00', '09:30', 'JavaScript Introduction',          'lecture', TRUE, 5, '2025-02-17 09:35:00'),
-(6,  1, '2025-02-19', '08:00', '09:30', 'JavaScript DOM Manipulation',      'lecture', TRUE, 5, '2025-02-19 09:35:00'),
-(7,  1, '2025-02-24', '08:00', '09:30', 'JavaScript Events',                'lecture', TRUE, 5, '2025-02-24 09:35:00'),
-(8,  1, '2025-02-26', '08:00', '09:30', 'Responsive Design',                'lecture', TRUE, 5, '2025-02-26 09:35:00'),
+(1,  1, '2025-02-03', '08:00', '09:30', 'Introduction to Database Administration',    'lecture', TRUE, 4, '2025-02-03 09:35:00'),
+(2,  1, '2025-02-05', '08:00', '09:30', 'DBA Roles and Responsibilities',             'lecture', TRUE, 4, '2025-02-05 09:35:00'),
+(3,  1, '2025-02-10', '08:00', '09:30', 'Database Installation and Configuration',    'lecture', TRUE, 4, '2025-02-10 09:35:00'),
+(4,  1, '2025-02-12', '08:00', '09:30', 'User Management and Privileges',             'lecture', TRUE, 4, '2025-02-12 09:35:00'),
+(5,  1, '2025-02-17', '08:00', '09:30', 'Backup and Recovery Strategies',             'lecture', TRUE, 4, '2025-02-17 09:35:00'),
+(6,  1, '2025-02-19', '08:00', '09:30', 'Performance Tuning and Indexing',            'lecture', TRUE, 4, '2025-02-19 09:35:00'),
+(7,  1, '2025-02-24', '08:00', '09:30', 'Database Security',                          'lecture', TRUE, 4, '2025-02-24 09:35:00'),
+(8,  1, '2025-02-26', '08:00', '09:30', 'Replication and High Availability',          'lecture', TRUE, 4, '2025-02-26 09:35:00'),
 
--- Offering 2 - Computer Networks
-(9,  2, '2025-02-04', '10:00', '11:30', 'Introduction to Networks',         'lecture', TRUE, 6, '2025-02-04 11:35:00'),
-(10, 2, '2025-02-06', '10:00', '11:30', 'OSI Model',                        'lecture', TRUE, 6, '2025-02-06 11:35:00'),
-(11, 2, '2025-02-11', '10:00', '11:30', 'TCP/IP Protocol',                  'lecture', TRUE, 6, '2025-02-11 11:35:00'),
-(12, 2, '2025-02-13', '10:00', '11:30', 'IP Addressing',                    'lecture', TRUE, 6, '2025-02-13 11:35:00');
+-- ── Lecture Sessions (Offering 2 - OOP with Java) ────
+(9,  2, '2025-02-04', '10:00', '11:30', 'Introduction to OOP Concepts',               'lecture', TRUE, 4, '2025-02-04 11:35:00'),
+(10, 2, '2025-02-06', '10:00', '11:30', 'Java Classes and Objects',                   'lecture', TRUE, 4, '2025-02-06 11:35:00'),
+(11, 2, '2025-02-11', '10:00', '11:30', 'Inheritance and Polymorphism',               'lecture', TRUE, 4, '2025-02-11 11:35:00'),
+(12, 2, '2025-02-13', '10:00', '11:30', 'Interfaces and Abstract Classes',            'lecture', TRUE, 4, '2025-02-13 11:35:00'),
+(13, 2, '2025-02-18', '10:00', '11:30', 'Exception Handling in Java',                 'lecture', TRUE, 4, '2025-02-18 11:35:00'),
+(14, 2, '2025-02-20', '10:00', '11:30', 'Java Collections Framework',                 'lecture', TRUE, 4, '2025-02-20 11:35:00');
 
--- ── Lecture Attendance ───────────────────────────────
+-- ── Lecture Attendance (Offering 1 - DBA) ──────────────
 
--- Offering 1 Sessions 1-8
--- Student 9 (Ali) - Good attendance (7/8 = 87%)
+-- Sarfraz (9) - Good attendance 7/8 = 87.5%
 INSERT INTO lecture_attendance (session_id, student_id, status, marked_by) VALUES
-(1, 9, 'present', 5), (2, 9, 'present', 5), (3, 9, 'present', 5), (4, 9, 'present', 5),
-(5, 9, 'present', 5), (6, 9, 'present', 5), (7, 9, 'absent',  5), (8, 9, 'present', 5);
+(1, 9, 'present', 4),(2, 9, 'present', 4),(3, 9, 'present', 4),(4, 9, 'present', 4),
+(5, 9, 'present', 4),(6, 9, 'absent',  4),(7, 9, 'present', 4),(8, 9, 'present', 4);
 
--- Student 10 (Sara) - Perfect attendance (8/8 = 100%)
+-- Zain Arain (10) - Perfect 8/8 = 100%
 INSERT INTO lecture_attendance (session_id, student_id, status, marked_by) VALUES
-(1, 10, 'present', 5), (2, 10, 'present', 5), (3, 10, 'present', 5), (4, 10, 'present', 5),
-(5, 10, 'present', 5), (6, 10, 'present', 5), (7, 10, 'present', 5), (8, 10, 'present', 5);
+(1, 10, 'present', 4),(2, 10, 'present', 4),(3, 10, 'present', 4),(4, 10, 'present', 4),
+(5, 10, 'present', 4),(6, 10, 'present', 4),(7, 10, 'present', 4),(8, 10, 'present', 4);
 
--- Student 11 (Usman) - Low attendance (5/8 = 62%) SHORT ALERT
+-- Moeez Israr (11) - Low 5/8 = 62.5% SHORT ALERT
 INSERT INTO lecture_attendance (session_id, student_id, status, marked_by) VALUES
-(1, 11, 'present', 5), (2, 11, 'absent',  5), (3, 11, 'absent',  5), (4, 11, 'present', 5),
-(5, 11, 'absent',  5), (6, 11, 'present', 5), (7, 11, 'present', 5), (8, 11, 'absent',  5);
+(1, 11, 'present', 4),(2, 11, 'absent',  4),(3, 11, 'absent',  4),(4, 11, 'present', 4),
+(5, 11, 'absent',  4),(6, 11, 'present', 4),(7, 11, 'present', 4),(8, 11, 'absent',  4);
 
--- Student 12 (Fatima)
+-- Saba Hafeez (12) - 7/8 = 87.5%
 INSERT INTO lecture_attendance (session_id, student_id, status, marked_by) VALUES
-(1, 12, 'present', 5), (2, 12, 'present', 5), (3, 12, 'late',    5), (4, 12, 'present', 5),
-(5, 12, 'present', 5), (6, 12, 'absent',  5), (7, 12, 'present', 5), (8, 12, 'present', 5);
+(1, 12, 'present', 4),(2, 12, 'present', 4),(3, 12, 'late',    4),(4, 12, 'present', 4),
+(5, 12, 'present', 4),(6, 12, 'absent',  4),(7, 12, 'present', 4),(8, 12, 'present', 4);
 
--- Student 13 (Bilal)
+-- Shamaya (13) - 6/8 = 75%
 INSERT INTO lecture_attendance (session_id, student_id, status, marked_by) VALUES
-(1, 13, 'present', 5), (2, 13, 'absent',  5), (3, 13, 'present', 5), (4, 13, 'absent',  5),
-(5, 13, 'present', 5), (6, 13, 'present', 5), (7, 13, 'absent',  5), (8, 13, 'present', 5);
+(1, 13, 'present', 4),(2, 13, 'absent',  4),(3, 13, 'present', 4),(4, 13, 'absent',  4),
+(5, 13, 'present', 4),(6, 13, 'present', 4),(7, 13, 'absent',  4),(8, 13, 'present', 4);
 
--- Remaining 5 students for offering 1
+-- Kinza (14) - 8/8 = 100%
 INSERT INTO lecture_attendance (session_id, student_id, status, marked_by) VALUES
-(1, 19, 'present', 5),(2, 19, 'present', 5),(3, 19, 'present', 5),(4, 19, 'present', 5),
-(5, 19, 'absent', 5), (6, 19, 'present', 5),(7, 19, 'present', 5),(8, 19, 'present', 5),
-(1, 20, 'present', 5),(2, 20, 'absent', 5), (3, 20, 'present', 5),(4, 20, 'present', 5),
-(5, 20, 'present', 5),(6, 20, 'present', 5),(7, 20, 'absent', 5), (8, 20, 'present', 5),
-(1, 21, 'present', 5),(2, 21, 'present', 5),(3, 21, 'present', 5),(4, 21, 'absent', 5),
-(5, 21, 'present', 5),(6, 21, 'present', 5),(7, 21, 'present', 5),(8, 21, 'present', 5),
-(1, 22, 'present', 5),(2, 22, 'present', 5),(3, 22, 'absent', 5), (4, 22, 'present', 5),
-(5, 22, 'present', 5),(6, 22, 'late', 5),   (7, 22, 'present', 5),(8, 22, 'present', 5),
-(1, 23, 'absent', 5), (2, 23, 'absent', 5), (3, 23, 'present', 5),(4, 23, 'absent', 5),
-(5, 23, 'present', 5),(6, 23, 'absent', 5), (7, 23, 'present', 5),(8, 23, 'absent', 5);
+(1, 14, 'present', 4),(2, 14, 'present', 4),(3, 14, 'present', 4),(4, 14, 'present', 4),
+(5, 14, 'present', 4),(6, 14, 'present', 4),(7, 14, 'present', 4),(8, 14, 'present', 4);
 
--- ── Attendance Summaries (auto-calculated) ──────────
+-- Hafsa (15) - 7/8 = 87.5%
+INSERT INTO lecture_attendance (session_id, student_id, status, marked_by) VALUES
+(1, 15, 'present', 4),(2, 15, 'present', 4),(3, 15, 'present', 4),(4, 15, 'present', 4),
+(5, 15, 'absent',  4),(6, 15, 'present', 4),(7, 15, 'present', 4),(8, 15, 'present', 4);
+
+-- Azka (16) - 6/8 = 75%
+INSERT INTO lecture_attendance (session_id, student_id, status, marked_by) VALUES
+(1, 16, 'present', 4),(2, 16, 'absent',  4),(3, 16, 'present', 4),(4, 16, 'present', 4),
+(5, 16, 'present', 4),(6, 16, 'absent',  4),(7, 16, 'present', 4),(8, 16, 'present', 4);
+
+-- Kashaf (17) - 7/8 = 87.5%
+INSERT INTO lecture_attendance (session_id, student_id, status, marked_by) VALUES
+(1, 17, 'present', 4),(2, 17, 'present', 4),(3, 17, 'absent',  4),(4, 17, 'present', 4),
+(5, 17, 'present', 4),(6, 17, 'present', 4),(7, 17, 'present', 4),(8, 17, 'absent',  4);
+
+-- Haiqa (18) - 8/8 = 100%
+INSERT INTO lecture_attendance (session_id, student_id, status, marked_by) VALUES
+(1, 18, 'present', 4),(2, 18, 'present', 4),(3, 18, 'present', 4),(4, 18, 'present', 4),
+(5, 18, 'present', 4),(6, 18, 'present', 4),(7, 18, 'present', 4),(8, 18, 'present', 4);
+
+-- ── Attendance Summaries (Offering 1 - DBA) ──────────
 INSERT INTO attendance_summary
   (student_id, offering_id, total_classes, attended_classes, percentage, alert_triggered, last_updated)
 VALUES
-(9,  1, 8, 7, 87.50, FALSE, '2025-02-26'),
-(10, 1, 8, 8, 100.00,FALSE, '2025-02-26'),
-(11, 1, 8, 5, 62.50, TRUE,  '2025-02-26'),
-(12, 1, 8, 7, 87.50, FALSE, '2025-02-26'),
-(13, 1, 8, 5, 62.50, TRUE,  '2025-02-26'),
-(19, 1, 8, 7, 87.50, FALSE, '2025-02-26'),
-(20, 1, 8, 6, 75.00, FALSE, '2025-02-26'),
-(21, 1, 8, 7, 87.50, FALSE, '2025-02-26'),
-(22, 1, 8, 7, 87.50, FALSE, '2025-02-26'),
-(23, 1, 8, 3, 37.50, TRUE,  '2025-02-26');
+(9,  1, 8, 7, 87.50,  FALSE, '2025-02-26'),
+(10, 1, 8, 8, 100.00, FALSE, '2025-02-26'),
+(11, 1, 8, 5, 62.50,  TRUE,  '2025-02-26'),
+(12, 1, 8, 7, 87.50,  FALSE, '2025-02-26'),
+(13, 1, 8, 6, 75.00,  FALSE, '2025-02-26'),
+(14, 1, 8, 8, 100.00, FALSE, '2025-02-26'),
+(15, 1, 8, 7, 87.50,  FALSE, '2025-02-26'),
+(16, 1, 8, 6, 75.00,  FALSE, '2025-02-26'),
+(17, 1, 8, 7, 87.50,  FALSE, '2025-02-26'),
+(18, 1, 8, 8, 100.00, FALSE, '2025-02-26');
+
+-- ── Attendance Summaries (Offering 2 - OOP with Java) ─
+INSERT INTO attendance_summary
+  (student_id, offering_id, total_classes, attended_classes, percentage, alert_triggered, last_updated)
+VALUES
+(9,  2, 6, 6, 100.00, FALSE, '2025-02-20'),
+(10, 2, 6, 5, 83.33,  FALSE, '2025-02-20'),
+(11, 2, 6, 4, 66.67,  FALSE, '2025-02-20'),
+(12, 2, 6, 6, 100.00, FALSE, '2025-02-20'),
+(13, 2, 6, 5, 83.33,  FALSE, '2025-02-20'),
+(14, 2, 6, 6, 100.00, FALSE, '2025-02-20'),
+(15, 2, 6, 5, 83.33,  FALSE, '2025-02-20'),
+(16, 2, 6, 4, 66.67,  FALSE, '2025-02-20'),
+(17, 2, 6, 6, 100.00, FALSE, '2025-02-20'),
+(18, 2, 6, 6, 100.00, FALSE, '2025-02-20');
 
 -- ── Campus Gates ─────────────────────────────────────
 INSERT INTO campus_gates
@@ -374,6 +393,7 @@ INSERT INTO gate_schedules (gate_id, day_of_week, open_time, close_time) VALUES
 (1, 'friday',    '07:00', '22:00'),
 (1, 'saturday',  '08:00', '14:00'),
 (1, 'sunday',    '00:00', '00:00');
+
 -- =====================================================
 -- SEED 11: ASSIGNMENTS + SUBMISSIONS
 -- =====================================================
@@ -383,74 +403,68 @@ USE AI_Driven_Smart_LMS;
 INSERT INTO assignments
   (id, offering_id, title, description, total_marks, weightage_percent, due_date, file_required, allowed_file_types, plagiarism_check, created_by)
 VALUES
--- Offering 1 (Web Technologies)
-(1, 1, 'Assignment 1 - HTML Portfolio Page',
- 'Create a personal portfolio page using HTML and CSS. Include sections for About, Skills, and Contact.',
- 20, 10.00, '2025-02-15 23:59:00', TRUE, '.html,.zip', FALSE, 5),
+-- Offering 1 (Database Administration)
+(1, 1, 'Assignment 1 - DBA Installation Report',
+ 'Install MySQL Server and write a report covering installation steps, configuration, and initial user setup.',
+ 20, 10.00, '2025-02-15 23:59:00', TRUE, '.pdf,.docx', FALSE, 4),
 
-(2, 1, 'Assignment 2 - CSS Responsive Layout',
- 'Design a fully responsive webpage using Flexbox and Grid. Must work on mobile and desktop.',
- 20, 10.00, '2025-03-01 23:59:00', TRUE, '.html,.css,.zip', TRUE, 5),
+(2, 1, 'Assignment 2 - Backup & Recovery Plan',
+ 'Design a full backup and recovery plan for a hospital database system. Include logical/physical backup strategies.',
+ 20, 10.00, '2025-03-01 23:59:00', TRUE, '.pdf,.docx', TRUE, 4),
 
-(3, 1, 'Assignment 3 - JavaScript Form Validation',
- 'Build a registration form with complete client-side validation using JavaScript.',
- 30, 15.00, '2025-03-20 23:59:00', TRUE, '.html,.js,.zip', TRUE, 5),
+(3, 1, 'Assignment 3 - Performance Tuning Report',
+ 'Analyze a slow-running query, apply indexing strategies, and document the performance improvement.',
+ 30, 15.00, '2025-03-20 23:59:00', TRUE, '.pdf,.sql', TRUE, 4),
 
--- Offering 2 (Computer Networks)
-(4, 2, 'Assignment 1 - OSI Model Report',
- 'Write a detailed report explaining all 7 layers of the OSI model with real-world examples.',
- 25, 10.00, '2025-02-20 23:59:00', TRUE, '.pdf,.docx', FALSE, 6),
+-- Offering 2 (OOP with Java)
+(4, 2, 'Assignment 1 - Java Class Design',
+ 'Design a class hierarchy for a university system. Implement at least 3 classes using inheritance and encapsulation.',
+ 25, 10.00, '2025-02-20 23:59:00', TRUE, '.java,.zip', FALSE, 4),
 
-(5, 2, 'Assignment 2 - Subnetting Practice',
- 'Solve 10 subnetting problems. Show all working steps for each problem.',
- 25, 10.00, '2025-03-10 23:59:00', TRUE, '.pdf,.docx', FALSE, 6),
+(5, 2, 'Assignment 2 - Java Collections Project',
+ 'Build a student record management console app using Java ArrayList and HashMap.',
+ 25, 10.00, '2025-03-10 23:59:00', TRUE, '.java,.zip', FALSE, 4),
 
--- Offering 3 (Software Engineering)
-(6, 3, 'Assignment 1 - SRS Document',
- 'Prepare a complete Software Requirements Specification for a Library Management System.',
- 40, 15.00, '2025-02-28 23:59:00', TRUE, '.pdf,.docx', FALSE, 8),
+-- Offering 3 (Software Project Management)
+(6, 3, 'Assignment 1 - Project Charter',
+ 'Create a full project charter for your Final Year Project including scope, schedule, budget, and stakeholders.',
+ 40, 15.00, '2025-02-28 23:59:00', TRUE, '.pdf,.docx', FALSE, 5),
 
--- Offering 4 (Artificial Intelligence)
-(7, 4, 'Assignment 1 - AI Literature Review',
- 'Write a 2000-word literature review on any current AI application in healthcare.',
- 30, 10.00, '2025-02-25 23:59:00', TRUE, '.pdf', TRUE, 4);
+-- Offering 4 (Final Year Project)
+(7, 4, 'FYP Proposal Document',
+ 'Submit a detailed FYP proposal including problem statement, objectives, methodology, and expected outcomes.',
+ 30, 10.00, '2025-02-25 23:59:00', TRUE, '.pdf', TRUE, 6);
 
 
--- ── Submissions ──────────────────────────────────────
--- Assignment 1 (HTML Portfolio) - Offering 1
+-- ── Submissions (Assignment 1 - DBA Installation) ────
 INSERT INTO assignment_submissions
   (assignment_id, student_id, file_path, remarks, obtained_marks, feedback, status, graded_by, graded_at)
 VALUES
-(1, 9,  'uploads/submissions/a1_s9_portfolio.zip',  'Used Bootstrap for styling',     18, 'Good work! Clean structure.',           'graded', 5, '2025-02-17 10:00:00'),
-(1, 10, 'uploads/submissions/a1_s10_portfolio.zip', 'All sections completed',         20, 'Excellent! Perfect submission.',        'graded', 5, '2025-02-17 10:30:00'),
-(1, 11, 'uploads/submissions/a1_s11_portfolio.zip', 'Basic version submitted',        14, 'Missing contact section. Redo CSS.',    'graded', 5, '2025-02-17 11:00:00'),
-(1, 12, 'uploads/submissions/a1_s12_portfolio.zip', NULL,                             17, 'Good layout, minor CSS issues.',        'graded', 5, '2025-02-17 11:30:00'),
-(1, 13, 'uploads/submissions/a1_s13_portfolio.zip', 'Late submission',                12, 'Submitted late. Basic HTML only.',      'late',   5, '2025-02-17 12:00:00'),
-(1, 19, 'uploads/submissions/a1_s19_portfolio.zip', NULL,                             19, 'Very good responsive design.',          'graded', 5, '2025-02-17 12:30:00'),
-(1, 20, 'uploads/submissions/a1_s20_portfolio.zip', NULL,                             16, 'Good effort, improve animations.',      'graded', 5, '2025-02-17 13:00:00'),
-(1, 21, 'uploads/submissions/a1_s21_portfolio.zip', NULL,                             15, 'Decent work, add more content.',        'graded', 5, '2025-02-17 13:30:00'),
-(1, 22, 'uploads/submissions/a1_s22_portfolio.zip', NULL,                             18, 'Nice design and clean code.',           'graded', 5, '2025-02-17 14:00:00');
--- Student 23 did not submit
+(1, 9,  'uploads/submissions/a1_sarfraz_dba.pdf',  'Detailed steps included',           18, 'Well documented. Add screenshots.', 'graded', 4, '2025-02-17 10:00:00'),
+(1, 10, 'uploads/submissions/a1_zain_dba.pdf',     'All steps with screenshots',        20, 'Perfect submission!',               'graded', 4, '2025-02-17 10:30:00'),
+(1, 11, 'uploads/submissions/a1_moeez_dba.pdf',    'Basic installation only',           13, 'Missing config section. Redo.',     'graded', 4, '2025-02-17 11:00:00'),
+(1, 12, 'uploads/submissions/a1_saba_dba.pdf',     NULL,                                17, 'Good work, minor errors.',          'graded', 4, '2025-02-17 11:30:00'),
+(1, 13, 'uploads/submissions/a1_shamaya_dba.pdf',  'Late submission',                   12, 'Late. Incomplete config steps.',    'late',   4, '2025-02-17 12:00:00'),
+(1, 14, 'uploads/submissions/a1_kinza_dba.pdf',    NULL,                                19, 'Excellent detail and clarity.',     'graded', 4, '2025-02-17 12:30:00'),
+(1, 15, 'uploads/submissions/a1_hafsa_dba.pdf',    NULL,                                16, 'Good effort. Improve formatting.',  'graded', 4, '2025-02-17 13:00:00'),
+(1, 16, 'uploads/submissions/a1_azka_dba.pdf',     NULL,                                15, 'Decent work. Add more detail.',     'graded', 4, '2025-02-17 13:30:00'),
+(1, 17, 'uploads/submissions/a1_kashaf_dba.pdf',   NULL,                                18, 'Nice structure and clean steps.',   'graded', 4, '2025-02-17 14:00:00'),
+(1, 18, 'uploads/submissions/a1_haiqa_dba.pdf',    NULL,                                20, 'Outstanding! Complete and neat.',   'graded', 4, '2025-02-17 14:30:00');
 
--- Assignment 4 (OSI Report) - Offering 2
+-- ── Submissions (Assignment 4 - Java Class Design) ───
 INSERT INTO assignment_submissions
   (assignment_id, student_id, file_path, remarks, obtained_marks, feedback, status, graded_by, graded_at)
 VALUES
-(4, 9,  'uploads/submissions/a4_s9_osi.pdf',  'Covered all 7 layers with diagrams',  22, 'Well written with good examples.',     'graded', 6, '2025-02-22 10:00:00'),
-(4, 10, 'uploads/submissions/a4_s10_osi.pdf', NULL,                                  25, 'Perfect report! Great research.',      'graded', 6, '2025-02-22 10:30:00'),
-(4, 11, 'uploads/submissions/a4_s11_osi.pdf', NULL,                                  18, 'Missing examples for layers 5-7.',     'graded', 6, '2025-02-22 11:00:00'),
-(4, 14, 'uploads/submissions/a4_s14_osi.pdf', NULL,                                  20, 'Good report, minor formatting issues.','graded', 6, '2025-02-22 11:30:00'),
-(4, 15, 'uploads/submissions/a4_s15_osi.pdf', NULL,                                  23, 'Excellent work with references.',      'graded', 6, '2025-02-22 12:00:00');
+(4, 9,  'uploads/submissions/a4_sarfraz_java.zip', 'Used 4 classes with inheritance',   22, 'Well designed class hierarchy.',   'graded', 4, '2025-02-22 10:00:00'),
+(4, 10, 'uploads/submissions/a4_zain_java.zip',    NULL,                                25, 'Perfect OOP implementation!',      'graded', 4, '2025-02-22 10:30:00'),
+(4, 11, 'uploads/submissions/a4_moeez_java.zip',   NULL,                                16, 'Missing polymorphism examples.',   'graded', 4, '2025-02-22 11:00:00'),
+(4, 12, 'uploads/submissions/a4_saba_java.zip',    NULL,                                20, 'Good. Minor compilation issue.',   'graded', 4, '2025-02-22 11:30:00'),
+(4, 14, 'uploads/submissions/a4_kinza_java.zip',   NULL,                                23, 'Excellent with proper comments.',  'graded', 4, '2025-02-22 12:00:00'),
+(4, 15, 'uploads/submissions/a4_hafsa_java.zip',   NULL,                                21, 'Good design. Clean code.',         'graded', 4, '2025-02-22 12:30:00'),
+(4, 17, 'uploads/submissions/a4_kashaf_java.zip',  NULL,                                19, 'Good effort. Add more methods.',   'graded', 4, '2025-02-22 13:00:00'),
+(4, 18, 'uploads/submissions/a4_haiqa_java.zip',   NULL,                                24, 'Great implementation!',            'graded', 4, '2025-02-22 13:30:00');
+-- Students 13, 16 did not submit
 
--- Assignment 7 (AI Literature Review) - Offering 4
-INSERT INTO assignment_submissions
-  (assignment_id, student_id, file_path, remarks, obtained_marks, feedback, plagiarism_percentage, plagiarism_status, status, graded_by, graded_at)
-VALUES
-(7, 9,  'uploads/submissions/a7_s9_ai.pdf',  NULL, 27, 'Excellent review with strong references.', 8.5,  'completed', 'graded', 4, '2025-02-27 09:00:00'),
-(7, 11, 'uploads/submissions/a7_s11_ai.pdf', NULL, 22, 'Good but needs more recent papers.',       12.0, 'completed', 'graded', 4, '2025-02-27 09:30:00'),
-(7, 15, 'uploads/submissions/a7_s15_ai.pdf', NULL, 28, 'Outstanding literature review!',           5.2,  'completed', 'graded', 4, '2025-02-27 10:00:00'),
-(7, 18, 'uploads/submissions/a7_s18_ai.pdf', NULL, 25, 'Well structured and well cited.',          7.8,  'completed', 'graded', 4, '2025-02-27 10:30:00'),
-(7, 24, 'uploads/submissions/a7_s24_ai.pdf', NULL, 26, 'Great analysis of AI in healthcare.',      6.5,  'completed', 'graded', 4, '2025-02-27 11:00:00');
 -- =====================================================
 -- SEED 12: QUIZZES + QUESTIONS + ATTEMPTS
 -- =====================================================
@@ -460,187 +474,114 @@ USE AI_Driven_Smart_LMS;
 INSERT INTO quizzes
   (id, offering_id, title, description, quiz_type, total_questions, total_marks, time_limit_minutes, start_time, end_time, is_mandatory, auto_grading, shuffle_questions, created_by)
 VALUES
--- Offering 1 (Web Technologies)
-(1, 1, 'Quiz 1 - HTML Basics',
- 'Test your knowledge of HTML tags and structure',
+-- Offering 1 (Database Administration)
+(1, 1, 'Quiz 1 - DBA Basics',
+ 'Test your knowledge of DBA roles, responsibilities and database architecture.',
  'teacher', 5, 10, 15,
  '2025-02-10 08:00:00', '2025-02-10 23:59:00',
- TRUE, TRUE, FALSE, 5),
+ TRUE, TRUE, FALSE, 4),
 
-(2, 1, 'Quiz 2 - CSS Fundamentals',
- 'CSS selectors, properties and box model',
+(2, 1, 'Quiz 2 - Backup & Security',
+ 'Backup strategies, user management and database security concepts.',
  'teacher', 5, 10, 15,
- '2025-02-17 08:00:00', '2025-02-17 23:59:00',
- TRUE, TRUE, TRUE, 5),
+ '2025-02-19 08:00:00', '2025-02-19 23:59:00',
+ TRUE, TRUE, TRUE, 4),
 
--- Offering 2 (Computer Networks)
-(3, 2, 'Quiz 1 - Network Basics',
- 'OSI layers and TCP/IP fundamentals',
+-- Offering 2 (OOP with Java)
+(3, 2, 'Quiz 1 - OOP Concepts',
+ 'Classes, objects, inheritance and polymorphism in Java.',
  'teacher', 5, 10, 15,
  '2025-02-11 10:00:00', '2025-02-11 23:59:00',
- TRUE, TRUE, FALSE, 6),
+ TRUE, TRUE, FALSE, 4),
 
--- Offering 4 (Artificial Intelligence)
-(4, 4, 'Quiz 1 - AI Concepts',
- 'Introduction to AI, search algorithms, and agents',
+-- Offering 3 (Software Project Management)
+(4, 3, 'Quiz 1 - Agile & Scrum',
+ 'Agile manifesto, Scrum ceremonies and project lifecycle.',
  'teacher', 5, 10, 20,
- '2025-02-19 14:00:00', '2025-02-19 23:59:00',
- TRUE, TRUE, FALSE, 4);
+ '2025-02-17 11:00:00', '2025-02-17 23:59:00',
+ TRUE, TRUE, FALSE, 5);
 
 
 -- ── Quiz Questions ───────────────────────────────────
 
--- Quiz 1 (HTML Basics)
+-- Quiz 1 (DBA Basics)
 INSERT INTO quiz_questions (quiz_id, question_text, question_type, options, correct_answer, marks, difficulty, explanation) VALUES
-(1, 'What does HTML stand for?',
- 'mcq', '["HyperText Markup Language","HighText Machine Language","HyperText and links Markup Language","None of these"]',
- 'HyperText Markup Language', 2, 'easy',
- 'HTML stands for HyperText Markup Language, the standard for web pages.'),
+(1, 'What does DBA stand for?',
+ 'mcq', '["Data Block Architecture","Database Administrator","Dynamic Byte Allocation","Data Backup Agent"]',
+ 'Database Administrator', 2, 'easy',
+ 'DBA stands for Database Administrator, responsible for managing database systems.'),
 
-(1, 'Which tag is used for the largest heading in HTML?',
- 'mcq', '["<h6>","<heading>","<h1>","<head>"]',
- '<h1>', 2, 'easy',
- '<h1> defines the largest heading, <h6> the smallest.'),
+(1, 'Which command is used to create a new user in MySQL?',
+ 'mcq', '["ADD USER","NEW USER","CREATE USER","INSERT USER"]',
+ 'CREATE USER', 2, 'easy',
+ 'The CREATE USER command is used to create new database users.'),
 
-(1, 'Which HTML attribute specifies an alternate text for an image?',
- 'mcq', '["src","alt","title","href"]',
- 'alt', 2, 'easy',
- 'The alt attribute provides alternative text when image cannot be displayed.'),
+(1, 'What is the purpose of an index in a database?',
+ 'mcq', '["To delete records faster","To speed up data retrieval","To encrypt data","To backup data"]',
+ 'To speed up data retrieval', 2, 'medium',
+ 'Indexes improve the speed of data retrieval operations on a database table.'),
 
-(1, 'Which HTML tag is used to create a hyperlink?',
- 'mcq', '["<link>","<a>","<href>","<url>"]',
- '<a>', 2, 'medium',
- 'The <a> anchor tag with href attribute creates hyperlinks.'),
+(1, 'Which type of backup copies only the data that has changed since the last backup?',
+ 'mcq', '["Full backup","Cold backup","Incremental backup","Hot backup"]',
+ 'Incremental backup', 2, 'medium',
+ 'Incremental backup only backs up data changed since the last backup operation.'),
 
-(1, 'What is the correct HTML element for inserting a line break?',
- 'mcq', '["<break>","<lb>","<br>","<newline>"]',
- '<br>', 2, 'easy',
- '<br> is a self-closing tag that inserts a line break.');
+(1, 'What is a tablespace in Oracle/MySQL?',
+ 'mcq', '["A temporary variable","A logical storage unit for database objects","A network connection","A user role"]',
+ 'A logical storage unit for database objects', 2, 'medium',
+ 'A tablespace is a logical storage unit that groups related database objects together.');
 
-
--- Quiz 2 (CSS Fundamentals)
+-- Quiz 3 (OOP Concepts)
 INSERT INTO quiz_questions (quiz_id, question_text, question_type, options, correct_answer, marks, difficulty, explanation) VALUES
-(2, 'What does CSS stand for?',
- 'mcq', '["Cascading Style Sheets","Creative Style Sheets","Computer Style Sheets","Colorful Style Sheets"]',
- 'Cascading Style Sheets', 2, 'easy',
- 'CSS stands for Cascading Style Sheets, used to style HTML.'),
+(3, 'Which OOP principle hides internal implementation details?',
+ 'mcq', '["Inheritance","Polymorphism","Encapsulation","Abstraction"]',
+ 'Encapsulation', 2, 'easy',
+ 'Encapsulation hides the internal state and implementation from outside classes.'),
 
-(2, 'Which CSS property controls the text size?',
- 'mcq', '["font-style","text-size","font-size","text-style"]',
- 'font-size', 2, 'easy',
- 'font-size property sets the size of the font.'),
+(3, 'Which keyword is used to inherit a class in Java?',
+ 'mcq', '["implements","extends","inherits","super"]',
+ 'extends', 2, 'easy',
+ 'The extends keyword is used in Java to inherit from a parent class.'),
 
-(2, 'How do you select an element with id "demo" in CSS?',
- 'mcq', '[".demo","#demo","demo","*demo"]',
- '#demo', 2, 'easy',
- '# selector targets elements by their id attribute.'),
+(3, 'What is method overriding?',
+ 'mcq', '["Defining a method with same name but different parameters","Redefining a parent class method in a subclass","Calling a method twice","Deleting a method"]',
+ 'Redefining a parent class method in a subclass', 2, 'medium',
+ 'Method overriding allows a subclass to provide its own implementation of a parent class method.'),
 
-(2, 'Which property is used to change the background color?',
- 'mcq', '["bgcolor","background-color","color","background"]',
- 'background-color', 2, 'medium',
- 'background-color property sets the background color of an element.'),
+(3, 'Which Java keyword refers to the current object inside a class?',
+ 'mcq', '["self","current","this","me"]',
+ 'this', 2, 'easy',
+ 'The this keyword refers to the current instance of the class in Java.'),
 
-(2, 'What is the default display value for a <div> element?',
- 'mcq', '["inline","inline-block","block","flex"]',
- 'block', 2, 'medium',
- '<div> is a block-level element by default.');
-
-
--- Quiz 3 (Network Basics)
-INSERT INTO quiz_questions (quiz_id, question_text, question_type, options, correct_answer, marks, difficulty, explanation) VALUES
-(3, 'How many layers does the OSI model have?',
- 'mcq', '["4","5","6","7"]',
- '7', 2, 'easy',
- 'The OSI model has 7 layers: Physical, Data Link, Network, Transport, Session, Presentation, Application.'),
-
-(3, 'Which layer of OSI is responsible for routing?',
- 'mcq', '["Physical","Data Link","Network","Transport"]',
- 'Network', 2, 'medium',
- 'The Network layer (Layer 3) handles routing and logical addressing.'),
-
-(3, 'What does IP stand for?',
- 'mcq', '["Internet Protocol","Internal Protocol","Internet Process","Intranet Protocol"]',
- 'Internet Protocol', 2, 'easy',
- 'IP stands for Internet Protocol, used for addressing and routing.'),
-
-(3, 'Which protocol operates at the Transport layer?',
- 'mcq', '["HTTP","IP","TCP","ARP"]',
- 'TCP', 2, 'medium',
- 'TCP (Transmission Control Protocol) operates at Transport Layer (Layer 4).'),
-
-(3, 'What is the maximum length of an IPv4 address in bits?',
- 'mcq', '["16","32","64","128"]',
- '32', 2, 'easy',
- 'IPv4 addresses are 32 bits (4 octets), e.g., 192.168.1.1');
-
-
--- Quiz 4 (AI Concepts)
-INSERT INTO quiz_questions (quiz_id, question_text, question_type, options, correct_answer, marks, difficulty, explanation) VALUES
-(4, 'What is Artificial Intelligence?',
- 'mcq', '["A programming language","Simulation of human intelligence by machines","A type of database","An operating system"]',
- 'Simulation of human intelligence by machines', 2, 'easy',
- 'AI is the simulation of human intelligence processes by computer systems.'),
-
-(4, 'Which of the following is a type of AI search algorithm?',
- 'mcq', '["Quick Sort","Breadth First Search","Binary Search","Bubble Sort"]',
- 'Breadth First Search', 2, 'medium',
- 'BFS is used in AI for uninformed search in problem-solving.'),
-
-(4, 'What does ML stand for in AI context?',
- 'mcq', '["Machine Logic","Machine Learning","Memory Logic","Multiple Learning"]',
- 'Machine Learning', 2, 'easy',
- 'ML stands for Machine Learning, a subset of AI.'),
-
-(4, 'Which algorithm is used for classification in ML?',
- 'mcq', '["K-Means","Linear Regression","Decision Tree","PCA"]',
- 'Decision Tree', 2, 'medium',
- 'Decision Trees are used for both classification and regression tasks.'),
-
-(4, 'What is a neural network inspired by?',
- 'mcq', '["Computer circuits","Human brain neurons","Mathematical equations","DNA structure"]',
- 'Human brain neurons', 2, 'medium',
- 'Neural networks are inspired by the biological neural networks in human brains.');
+(3, 'What is an abstract class in Java?',
+ 'mcq', '["A class with no methods","A class that cannot be instantiated","A class with private constructor","A final class"]',
+ 'A class that cannot be instantiated', 2, 'medium',
+ 'An abstract class cannot be instantiated directly and may contain abstract methods.');
 
 
 -- ── Quiz Attempts ────────────────────────────────────
 
--- Quiz 1 (HTML Basics) Attempts
+-- Quiz 1 (DBA Basics) Attempts
 INSERT INTO quiz_attempts (quiz_id, student_id, start_time, end_time, score, total_marks, percentage, answers, status) VALUES
-(1, 9,  '2025-02-10 10:00:00', '2025-02-10 10:12:00', 10, 10, 100.00,
- '{"1":"HyperText Markup Language","2":"<h1>","3":"alt","4":"<a>","5":"<br>"}', 'completed'),
+(1, 9,  '2025-02-10 08:30:00', '2025-02-10 08:43:00', 10, 10, 100.00, '{"1":"Database Administrator","2":"CREATE USER","3":"To speed up data retrieval","4":"Incremental backup","5":"A logical storage unit for database objects"}', 'completed'),
+(1, 10, '2025-02-10 09:00:00', '2025-02-10 09:13:00', 8,  10, 80.00,  '{"1":"Database Administrator","2":"CREATE USER","3":"To speed up data retrieval","4":"Full backup","5":"A logical storage unit for database objects"}', 'completed'),
+(1, 11, '2025-02-10 09:30:00', '2025-02-10 09:42:00', 6,  10, 60.00,  '{"1":"Database Administrator","2":"ADD USER","3":"To delete records faster","4":"Incremental backup","5":"A logical storage unit for database objects"}', 'completed'),
+(1, 12, '2025-02-10 10:00:00', '2025-02-10 10:12:00', 10, 10, 100.00, '{"1":"Database Administrator","2":"CREATE USER","3":"To speed up data retrieval","4":"Incremental backup","5":"A logical storage unit for database objects"}', 'completed'),
+(1, 13, '2025-02-10 10:30:00', '2025-02-10 10:43:00', 8,  10, 80.00,  '{"1":"Database Administrator","2":"CREATE USER","3":"To speed up data retrieval","4":"Full backup","5":"A network connection"}', 'completed'),
+(1, 14, '2025-02-10 11:00:00', '2025-02-10 11:14:00', 10, 10, 100.00, '{"1":"Database Administrator","2":"CREATE USER","3":"To speed up data retrieval","4":"Incremental backup","5":"A logical storage unit for database objects"}', 'completed'),
+(1, 15, '2025-02-10 11:30:00', '2025-02-10 11:42:00', 8,  10, 80.00,  '{"1":"Database Administrator","2":"CREATE USER","3":"To encrypt data","4":"Incremental backup","5":"A logical storage unit for database objects"}', 'completed'),
+(1, 16, '2025-02-10 12:00:00', '2025-02-10 12:13:00', 6,  10, 60.00,  '{"1":"Data Block Architecture","2":"CREATE USER","3":"To speed up data retrieval","4":"Full backup","5":"A logical storage unit for database objects"}', 'completed'),
+(1, 17, '2025-02-10 12:30:00', '2025-02-10 12:44:00', 8,  10, 80.00,  '{"1":"Database Administrator","2":"CREATE USER","3":"To speed up data retrieval","4":"Cold backup","5":"A logical storage unit for database objects"}', 'completed'),
+(1, 18, '2025-02-10 13:00:00', '2025-02-10 13:14:00', 10, 10, 100.00, '{"1":"Database Administrator","2":"CREATE USER","3":"To speed up data retrieval","4":"Incremental backup","5":"A logical storage unit for database objects"}', 'completed');
 
-(1, 10, '2025-02-10 11:00:00', '2025-02-10 11:14:00', 8, 10, 80.00,
- '{"1":"HyperText Markup Language","2":"<h1>","3":"alt","4":"<href>","5":"<br>"}', 'completed'),
-
-(1, 11, '2025-02-10 12:00:00', '2025-02-10 12:13:00', 6, 10, 60.00,
- '{"1":"HyperText Markup Language","2":"<h6>","3":"src","4":"<a>","5":"<br>"}', 'completed'),
-
-(1, 12, '2025-02-10 13:00:00', '2025-02-10 13:11:00', 10, 10, 100.00,
- '{"1":"HyperText Markup Language","2":"<h1>","3":"alt","4":"<a>","5":"<br>"}', 'completed'),
-
-(1, 19, '2025-02-10 14:00:00', '2025-02-10 14:12:00', 8, 10, 80.00,
- '{"1":"HyperText Markup Language","2":"<h1>","3":"title","4":"<a>","5":"<br>"}', 'completed'),
-
-(1, 20, '2025-02-10 15:00:00', '2025-02-10 15:13:00', 6, 10, 60.00,
- '{"1":"HyperText Markup Language","2":"<h1>","3":"alt","4":"<href>","5":"<newline>"}', 'completed'),
-
-(1, 22, '2025-02-10 16:00:00', '2025-02-10 16:14:00', 8, 10, 80.00,
- '{"1":"HyperText Markup Language","2":"<h1>","3":"alt","4":"<link>","5":"<br>"}', 'completed');
-
-
--- Quiz 3 (Network Basics) Attempts
+-- Quiz 3 (OOP Concepts) Attempts
 INSERT INTO quiz_attempts (quiz_id, student_id, start_time, end_time, score, total_marks, percentage, answers, status) VALUES
-(3, 9,  '2025-02-11 11:00:00', '2025-02-11 11:13:00', 8, 10, 80.00,
- '{"6":"7","7":"Network","8":"Internet Protocol","9":"TCP","10":"32"}', 'completed'),
+(3, 9,  '2025-02-11 10:30:00', '2025-02-11 10:43:00', 8,  10, 80.00,  '{"6":"Encapsulation","7":"extends","8":"Redefining a parent class method in a subclass","9":"self","10":"A class that cannot be instantiated"}', 'completed'),
+(3, 10, '2025-02-11 11:00:00', '2025-02-11 11:14:00', 10, 10, 100.00, '{"6":"Encapsulation","7":"extends","8":"Redefining a parent class method in a subclass","9":"this","10":"A class that cannot be instantiated"}', 'completed'),
+(3, 12, '2025-02-11 11:30:00', '2025-02-11 11:42:00', 10, 10, 100.00, '{"6":"Encapsulation","7":"extends","8":"Redefining a parent class method in a subclass","9":"this","10":"A class that cannot be instantiated"}', 'completed'),
+(3, 14, '2025-02-11 12:00:00', '2025-02-11 12:13:00', 8,  10, 80.00,  '{"6":"Abstraction","7":"extends","8":"Redefining a parent class method in a subclass","9":"this","10":"A class that cannot be instantiated"}', 'completed'),
+(3, 18, '2025-02-11 12:30:00', '2025-02-11 12:43:00', 10, 10, 100.00, '{"6":"Encapsulation","7":"extends","8":"Redefining a parent class method in a subclass","9":"this","10":"A class that cannot be instantiated"}', 'completed');
 
-(3, 10, '2025-02-11 12:00:00', '2025-02-11 12:14:00', 10, 10, 100.00,
- '{"6":"7","7":"Network","8":"Internet Protocol","9":"TCP","10":"32"}', 'completed'),
-
-(3, 14, '2025-02-11 13:00:00', '2025-02-11 13:12:00', 8,  10, 80.00,
- '{"6":"7","7":"Transport","8":"Internet Protocol","9":"TCP","10":"32"}', 'completed'),
-
-(3, 15, '2025-02-11 14:00:00', '2025-02-11 14:13:00', 10, 10, 100.00,
- '{"6":"7","7":"Network","8":"Internet Protocol","9":"TCP","10":"32"}', 'completed');
 -- =====================================================
 -- SEED 13: EXAMS + RESULTS
 -- =====================================================
@@ -650,79 +591,59 @@ USE AI_Driven_Smart_LMS;
 INSERT INTO exams
   (id, offering_id, exam_type, title, total_marks, weightage_percent, exam_date, start_time, end_time, room_number)
 VALUES
--- Offering 1 (Web Technologies)
-(1, 1, 'midterm', 'Web Technologies Midterm Exam',  50, 30.00, '2025-03-15', '09:00', '11:00', 'Exam Hall A'),
-(2, 1, 'final',   'Web Technologies Final Exam',    100, 50.00, '2025-06-01', '09:00', '12:00', 'Exam Hall A'),
+-- Offering 1 (Database Administration)
+(1, 1, 'midterm', 'Database Administration Midterm Exam', 50, 30.00, '2025-03-15', '08:00', '10:00', 'Exam Hall A'),
+(2, 1, 'final',   'Database Administration Final Exam',   100, 50.00, '2025-06-01', '08:00', '11:00', 'Exam Hall A'),
 
--- Offering 2 (Computer Networks)
-(3, 2, 'midterm', 'Computer Networks Midterm Exam', 50, 30.00, '2025-03-17', '10:00', '12:00', 'Exam Hall B'),
-(4, 2, 'final',   'Computer Networks Final Exam',   100, 50.00, '2025-06-03', '10:00', '13:00', 'Exam Hall B'),
+-- Offering 2 (OOP with Java)
+(3, 2, 'midterm', 'OOP with Java Midterm Exam',           50, 30.00, '2025-03-17', '10:00', '12:00', 'Exam Hall B'),
+(4, 2, 'final',   'OOP with Java Final Exam',             100, 50.00, '2025-06-03', '10:00', '13:00', 'Exam Hall B'),
 
--- Offering 3 (Software Engineering)
-(5, 3, 'midterm', 'Software Engineering Midterm',   50, 30.00, '2025-03-18', '11:00', '13:00', 'IT-103'),
+-- Offering 3 (Software Project Management)
+(5, 3, 'midterm', 'Software Project Management Midterm',  50, 30.00, '2025-03-18', '11:00', '13:00', 'IT-201'),
 
--- Offering 4 (Artificial Intelligence)
-(6, 4, 'midterm', 'AI Midterm Exam',                50, 30.00, '2025-03-20', '14:00', '16:00', 'IT-201');
+-- Offering 4 (Final Year Project)
+(6, 4, 'midterm', 'FYP Progress Evaluation',              50, 30.00, '2025-03-20', '02:00', '04:00', 'IT-202');
 
 
--- ── Exam Results ─────────────────────────────────────
-
--- Midterm 1 (Web Technologies)
+-- ── Exam Results (Midterm 1 - DBA) ──────────────────
 INSERT INTO exam_results (exam_id, student_id, obtained_marks, grade, entered_by) VALUES
-(1, 9,  44, 'A',  5),
-(1, 10, 49, 'A+', 5),
-(1, 11, 32, 'C+', 5),
-(1, 12, 41, 'A-', 5),
-(1, 13, 35, 'B',  5),
-(1, 19, 46, 'A+', 5),
-(1, 20, 38, 'B+', 5),
-(1, 21, 40, 'A-', 5),
-(1, 22, 43, 'A',  5),
-(1, 23, 25, 'D',  5);
+(1, 9,  44, 'A',  4),
+(1, 10, 49, 'A+', 4),
+(1, 11, 30, 'C',  4),
+(1, 12, 41, 'A-', 4),
+(1, 13, 36, 'B',  4),
+(1, 14, 47, 'A+', 4),
+(1, 15, 38, 'B+', 4),
+(1, 16, 33, 'C+', 4),
+(1, 17, 40, 'A-', 4),
+(1, 18, 48, 'A+', 4);
 
--- Midterm 3 (Computer Networks)
+-- ── Exam Results (Midterm 3 - OOP with Java) ────────
 INSERT INTO exam_results (exam_id, student_id, obtained_marks, grade, entered_by) VALUES
-(3, 9,  42, 'A',  6),
-(3, 10, 47, 'A+', 6),
-(3, 11, 30, 'B',  6),
-(3, 14, 38, 'B+', 6),
-(3, 15, 45, 'A+', 6),
-(3, 16, 35, 'B',  6),
-(3, 17, 28, 'C+', 6),
-(3, 18, 40, 'A-', 6),
-(3, 19, 44, 'A',  6),
-(3, 20, 36, 'B+', 6);
-
--- Midterm 6 (AI)
-INSERT INTO exam_results (exam_id, student_id, obtained_marks, grade, entered_by) VALUES
-(6, 9,  43, 'A',  4),
-(6, 11, 35, 'B',  4),
-(6, 15, 48, 'A+', 4),
-(6, 18, 40, 'A-', 4),
-(6, 24, 45, 'A+', 4);
-
+(3, 9,  42, 'A',  4),
+(3, 10, 48, 'A+', 4),
+(3, 11, 28, 'C',  4),
+(3, 12, 43, 'A',  4),
+(3, 13, 35, 'B',  4),
+(3, 14, 46, 'A+', 4),
+(3, 15, 39, 'B+', 4),
+(3, 16, 31, 'C+', 4),
+(3, 17, 41, 'A-', 4),
+(3, 18, 47, 'A+', 4);
 
 -- ── Grade updates for completed enrollments ──────────
-UPDATE enrollments SET grade_letter = 'A',  grade_points = 4.00
-WHERE student_id = 9  AND offering_id = 1;
-UPDATE enrollments SET grade_letter = 'A+', grade_points = 4.00
-WHERE student_id = 10 AND offering_id = 1;
-UPDATE enrollments SET grade_letter = 'B',  grade_points = 3.00
-WHERE student_id = 11 AND offering_id = 1;
-UPDATE enrollments SET grade_letter = 'A-', grade_points = 3.67
-WHERE student_id = 12 AND offering_id = 1;
-UPDATE enrollments SET grade_letter = 'B+', grade_points = 3.33
-WHERE student_id = 13 AND offering_id = 1;
-UPDATE enrollments SET grade_letter = 'A+', grade_points = 4.00
-WHERE student_id = 19 AND offering_id = 1;
-UPDATE enrollments SET grade_letter = 'B+', grade_points = 3.33
-WHERE student_id = 20 AND offering_id = 1;
-UPDATE enrollments SET grade_letter = 'A-', grade_points = 3.67
-WHERE student_id = 21 AND offering_id = 1;
-UPDATE enrollments SET grade_letter = 'A',  grade_points = 4.00
-WHERE student_id = 22 AND offering_id = 1;
-UPDATE enrollments SET grade_letter = 'D',  grade_points = 1.00
-WHERE student_id = 23 AND offering_id = 1;
+UPDATE enrollments SET grade_letter = 'A',  grade_points = 4.00 WHERE student_id = 9  AND offering_id = 1;
+UPDATE enrollments SET grade_letter = 'A+', grade_points = 4.00 WHERE student_id = 10 AND offering_id = 1;
+UPDATE enrollments SET grade_letter = 'C',  grade_points = 2.00 WHERE student_id = 11 AND offering_id = 1;
+UPDATE enrollments SET grade_letter = 'A-', grade_points = 3.67 WHERE student_id = 12 AND offering_id = 1;
+UPDATE enrollments SET grade_letter = 'B',  grade_points = 3.00 WHERE student_id = 13 AND offering_id = 1;
+UPDATE enrollments SET grade_letter = 'A+', grade_points = 4.00 WHERE student_id = 14 AND offering_id = 1;
+UPDATE enrollments SET grade_letter = 'B+', grade_points = 3.33 WHERE student_id = 15 AND offering_id = 1;
+UPDATE enrollments SET grade_letter = 'C+', grade_points = 2.33 WHERE student_id = 16 AND offering_id = 1;
+UPDATE enrollments SET grade_letter = 'A-', grade_points = 3.67 WHERE student_id = 17 AND offering_id = 1;
+UPDATE enrollments SET grade_letter = 'A+', grade_points = 4.00 WHERE student_id = 18 AND offering_id = 1;
+
 -- =====================================================
 -- SEED 14: FEE STRUCTURE + VOUCHERS + PAYMENTS
 -- =====================================================
@@ -732,7 +653,6 @@ USE AI_Driven_Smart_LMS;
 INSERT INTO fee_structure
   (id, program_id, semester_number, tuition_fee, admission_fee, library_fee, sports_fee, other_fees, valid_from)
 VALUES
--- BSIT Fee Structure (all 8 semesters)
 (1,  1, 1, 35000, 5000, 1000, 500, '[{"name":"Lab Fee","amount":2000},{"name":"Examination Fee","amount":1500}]', '2021-09-01'),
 (2,  1, 2, 35000, 0,    1000, 500, '[{"name":"Lab Fee","amount":2000},{"name":"Examination Fee","amount":1500}]', '2022-02-01'),
 (3,  1, 3, 36000, 0,    1000, 500, '[{"name":"Lab Fee","amount":2000},{"name":"Examination Fee","amount":1500}]', '2022-09-01'),
@@ -740,22 +660,13 @@ VALUES
 (5,  1, 5, 38000, 0,    1000, 500, '[{"name":"Lab Fee","amount":2000},{"name":"Examination Fee","amount":1500}]', '2023-09-01'),
 (6,  1, 6, 38000, 0,    1000, 500, '[{"name":"Lab Fee","amount":2000},{"name":"Examination Fee","amount":1500}]', '2024-02-01'),
 (7,  1, 7, 40000, 0,    1000, 500, '[{"name":"Lab Fee","amount":2500},{"name":"Examination Fee","amount":2000}]', '2024-09-01'),
-(8,  1, 8, 40000, 0,    1000, 500, '[{"name":"Lab Fee","amount":2500},{"name":"Examination Fee","amount":2000}]', '2025-02-01'),
-
--- BSCS Fee Structure
-(9,  2, 1, 37000, 5000, 1000, 500, '[{"name":"Lab Fee","amount":2500},{"name":"Examination Fee","amount":1500}]', '2021-09-01'),
-(10, 2, 8, 42000, 0,    1000, 500, '[{"name":"Lab Fee","amount":3000},{"name":"Examination Fee","amount":2000}]', '2025-02-01'),
-
--- BBA Fee Structure
-(11, 3, 1, 30000, 4000, 1000, 500, '[{"name":"Examination Fee","amount":1500}]', '2021-09-01'),
-(12, 3, 8, 33000, 0,    1000, 500, '[{"name":"Examination Fee","amount":1500}]', '2025-02-01');
+(8,  1, 8, 40000, 0,    1000, 500, '[{"name":"Lab Fee","amount":2500},{"name":"Examination Fee","amount":2000}]', '2025-02-01');
 
 
 -- ── Fee Vouchers (Spring 2025 = semester_id 4) ───────
 INSERT INTO fee_vouchers
   (id, student_id, voucher_number, semester_id, amount, due_date, issue_date, status, fine_amount)
 VALUES
--- BSIT 2021 Batch (Semester 8 fee)
 (1,  9,  'VCH-2025-00001', 4, 46000.00, '2025-02-28', '2025-02-01', 'paid',    0),
 (2,  10, 'VCH-2025-00002', 4, 46000.00, '2025-02-28', '2025-02-01', 'paid',    0),
 (3,  11, 'VCH-2025-00003', 4, 46000.00, '2025-02-28', '2025-02-01', 'partial', 0),
@@ -765,39 +676,22 @@ VALUES
 (7,  15, 'VCH-2025-00007', 4, 46000.00, '2025-02-28', '2025-02-01', 'paid',    0),
 (8,  16, 'VCH-2025-00008', 4, 46000.00, '2025-02-28', '2025-02-01', 'unpaid',  0),
 (9,  17, 'VCH-2025-00009', 4, 46000.00, '2025-02-28', '2025-02-01', 'overdue', 1000),
-(10, 18, 'VCH-2025-00010', 4, 46000.00, '2025-02-28', '2025-02-01', 'paid',    0),
-
--- BSIT 2022 Batch (Semester 6 fee)
-(11, 19, 'VCH-2025-00011', 4, 41500.00, '2025-02-28', '2025-02-01', 'paid',    0),
-(12, 20, 'VCH-2025-00012', 4, 41500.00, '2025-02-28', '2025-02-01', 'paid',    0),
-(13, 21, 'VCH-2025-00013', 4, 41500.00, '2025-02-28', '2025-02-01', 'unpaid',  0),
-(14, 22, 'VCH-2025-00014', 4, 41500.00, '2025-02-28', '2025-02-01', 'paid',    0),
-(15, 23, 'VCH-2025-00015', 4, 41500.00, '2025-02-28', '2025-02-01', 'overdue', 2000),
-
--- BSCS Batch
-(16, 24, 'VCH-2025-00016', 4, 48000.00, '2025-02-28', '2025-02-01', 'paid',    0),
-(17, 25, 'VCH-2025-00017', 4, 48000.00, '2025-02-28', '2025-02-01', 'paid',    0);
+(10, 18, 'VCH-2025-00010', 4, 46000.00, '2025-02-28', '2025-02-01', 'paid',    0);
 
 
 -- ── Fee Payments ─────────────────────────────────────
 INSERT INTO fee_payments
   (voucher_id, amount_paid, payment_method, reference_number, bank_name, received_by, receipt_number)
 VALUES
--- Paid vouchers full payment
-(1,  46000.00, 'bank_transfer', 'TXN-2025-001', 'HBL',     1, 'RCP-2025-001'),
-(2,  46000.00, 'online',        'TXN-2025-002', 'Easypaisa',1, 'RCP-2025-002'),
-(4,  46000.00, 'cash',           NULL,           NULL,       1, 'RCP-2025-004'),
-(6,  46000.00, 'bank_transfer', 'TXN-2025-006', 'MCB',      1, 'RCP-2025-006'),
+(1,  46000.00, 'bank_transfer', 'TXN-2025-001', 'HBL',      1, 'RCP-2025-001'),
+(2,  46000.00, 'online',        'TXN-2025-002', 'Easypaisa', 1, 'RCP-2025-002'),
+(4,  46000.00, 'cash',           NULL,           NULL,        1, 'RCP-2025-004'),
+(6,  46000.00, 'bank_transfer', 'TXN-2025-006', 'MCB',       1, 'RCP-2025-006'),
 (7,  46000.00, 'online',        'TXN-2025-007', 'JazzCash',  1, 'RCP-2025-007'),
-(10, 46000.00, 'bank_transfer', 'TXN-2025-010', 'UBL',      1, 'RCP-2025-010'),
-(11, 41500.00, 'bank_transfer', 'TXN-2025-011', 'HBL',      1, 'RCP-2025-011'),
-(12, 41500.00, 'cash',           NULL,           NULL,       1, 'RCP-2025-012'),
-(14, 41500.00, 'online',        'TXN-2025-014', 'Easypaisa',1, 'RCP-2025-014'),
-(16, 48000.00, 'bank_transfer', 'TXN-2025-016', 'MCB',      1, 'RCP-2025-016'),
-(17, 48000.00, 'bank_transfer', 'TXN-2025-017', 'HBL',      1, 'RCP-2025-017'),
+(10, 46000.00, 'bank_transfer', 'TXN-2025-010', 'UBL',       1, 'RCP-2025-010'),
+-- Partial payment
+(3,  25000.00, 'cash',           NULL,           NULL,        1, 'RCP-2025-003');
 
--- Partial payment (voucher 3 - student 11)
-(3,  25000.00, 'cash', NULL, NULL, 1, 'RCP-2025-003');
 -- =====================================================
 -- SEED 15: ANNOUNCEMENTS + NOTICES + CHAT GROUPS
 -- =====================================================
@@ -808,394 +702,319 @@ INSERT INTO announcements
   (id, title, content, created_by, target_type, target_id, priority, pinned_until)
 VALUES
 (1, 'Welcome to Spring 2025 Semester',
- 'Dear Students, Welcome to Spring 2025 semester. Classes will begin from February 3, 2025. Please ensure your course registrations are complete. Best regards, Administration.',
+ 'Dear Students, Welcome to Spring 2025 semester. Classes will begin from February 3, 2025. Please ensure your course registrations are complete. Best regards, Mr. Usman (Admin).',
  1, 'all', NULL, 'normal', '2025-02-10'),
 
 (2, 'Fee Submission Deadline - URGENT',
- 'This is to inform all students that the last date for fee submission is February 28, 2025. After this date a fine of Rs. 100/day will be charged. Please submit your fee immediately.',
+ 'This is to inform all BSIT 8th Semester students that the last date for fee submission is February 28, 2025. After this date a fine of Rs. 100/day will be charged.',
  1, 'all', NULL, 'urgent', '2025-02-28'),
 
-(3, 'Web Technologies - Lab Makeup Class',
- 'Dear Students, A makeup lab session for Web Technologies (IT-301) will be held on Saturday February 22, 2025 at 10:00 AM in Lab 3. Attendance is mandatory.',
- 5, 'course', 1, 'high', NULL),
+(3, 'Database Administration - Lab Session',
+ 'Dear Students, A lab session for Database Administration will be held on Saturday February 22, 2025 at 10:00 AM in Lab 3. Attendance is mandatory. - Mr. Ghulam Ghos',
+ 4, 'course', 1, 'high', NULL),
 
-(4, 'Computer Networks - Quiz 1 Schedule',
- 'Quiz 1 for Computer Networks will be held on February 11, 2025 during class time. The quiz will cover OSI Model and TCP/IP. Duration: 15 minutes.',
- 6, 'course', 2, 'normal', NULL),
+(4, 'OOP with Java - Quiz 1 Reminder',
+ 'Quiz 1 for OOP with Java will be held on February 11, 2025 during class time. Topic: Classes, Objects, Inheritance. Duration: 15 minutes. - Mr. Ghulam Ghos',
+ 4, 'course', 2, 'normal', NULL),
 
-(5, 'IT Department - HEC Accreditation Visit',
- 'The HEC accreditation team will be visiting our department on March 5-6, 2025. Students are requested to maintain discipline and wear their ID cards during this period.',
- 4, 'department', 1, 'high', '2025-03-06'),
+(5, 'IT Department - Semester 8 Final Project Guidelines',
+ 'All BSIT 8th Semester students must submit their Final Year Project proposals by February 25, 2025. Late submissions will not be accepted.',
+ 4, 'department', 1, 'high', '2025-02-25'),
 
-(6, 'AI Course - Guest Lecture on NLP',
- 'A guest lecture on Natural Language Processing will be conducted by Dr. Tariq from LUMS on February 28, 2025 at 3:00 PM in Seminar Hall. All IT students are welcome.',
- 4, 'department', 1, 'normal', NULL),
+(6, 'Software Project Management - Assignment 1 Extension',
+ 'The deadline for Project Charter submission has been extended to March 5, 2025. Please prepare a complete document. - Mr. Asif Raza',
+ 5, 'course', 3, 'normal', NULL),
 
 (7, 'Midterm Exam Schedule Announced',
- 'Midterm exams will be held from March 15-22, 2025. Detailed schedule has been posted on the notice board. Students are advised to prepare accordingly.',
- 1, 'all', NULL, 'high', '2025-03-22');
+ 'Midterm examinations for BSIT 8th Semester will commence from March 15, 2025. Detailed schedule is posted on the notice board. Best of luck to all students!',
+ 1, 'all', NULL, 'high', '2025-03-15');
 
-
--- ── Notice Board ─────────────────────────────────────
+-- ── Notice Board ──────────────────────────────────────
 INSERT INTO notice_board
-  (id, title, content, category, posted_by, expiry_date, is_public, views)
+  (title, content, posted_by, category, valid_until, is_active)
 VALUES
-(1, 'Spring 2025 Exam Schedule',
- 'Midterm Examinations Spring 2025\n\nWeb Technologies:    March 15, 09:00 AM - Exam Hall A\nComputer Networks:  March 17, 10:00 AM - Exam Hall B\nSoftware Engineering: March 18, 11:00 AM - IT-103\nArtificial Intelligence: March 20, 02:00 PM - IT-201\n\nRules:\n1. Bring your university ID card\n2. No mobile phones allowed\n3. Report 15 minutes before exam',
- 'Academic', 1, '2025-03-25', TRUE, 142),
+('BSIT 8th Semester Timetable Spring 2025',
+ 'Monday/Wednesday 08:00-09:30 - Database Administration (Mr. Ghulam Ghos, IT-301) | Tuesday/Thursday 10:00-11:30 - OOP with Java (Mr. Ghulam Ghos, IT-302) | Monday/Friday 11:00-12:30 - Software Project Management (Mr. Asif Raza, IT-303) | Wednesday/Friday 14:00-15:30 - Final Year Project (Ma''am Aqsa, IT-304)',
+ 1, 'academic', '2025-06-30', TRUE),
 
-(2, 'Final Year Project Guidelines 2025',
- 'Dear Final Year Students,\n\nPlease note the following deadlines:\n- Project Proposal: March 1, 2025\n- Progress Report 1: April 1, 2025\n- Progress Report 2: May 1, 2025\n- Final Submission: June 1, 2025\n- Defense: June 15-20, 2025\n\nAll documentation must be submitted in prescribed format.',
- 'Academic', 4, '2025-06-30', TRUE, 89),
+('Fee Challan Submission - BSIT 8th Semester',
+ 'Students who have not submitted their fee for Spring 2025 are reminded to do so immediately. Contact accounts department for duplicate challan. Fine: Rs. 100/day after deadline.',
+ 1, 'financial', '2025-03-15', TRUE),
 
-(3, 'Campus Maintenance Notice',
- 'The university swimming pool and sports complex will remain closed from February 20-28, 2025 for annual maintenance. All other facilities will remain operational.',
- 'Administrative', 1, '2025-02-28', TRUE, 45),
-
-(4, 'Scholarship Applications Open',
- 'Applications for Need-Based Scholarship Spring 2025 are now open. Eligible students with CGPA >= 2.5 and family income below Rs. 50,000/month may apply.\n\nDeadline: March 15, 2025\nForms available at: Scholarship Office, Admin Block',
- 'Financial', 1, '2025-03-15', TRUE, 210),
-
-(5, 'IT Department Seminar Series',
- 'IT Department Seminar Series 2025\n\nTopic: "Future of Artificial Intelligence in Pakistan"\nSpeaker: Dr. Umar Saif (Former Chairman, Punjab IT Board)\nDate: February 27, 2025\nTime: 2:00 PM\nVenue: Main Auditorium\n\nAll students and faculty are welcome.',
- 'Events', 4, '2025-02-28', TRUE, 178);
-
+('FYP Proposal Submission Guidelines',
+ 'Final Year Project proposals must include: Problem Statement, Objectives, Scope, Methodology, Technology Stack, Timeline, and Expected Outcomes. Submit in PDF format to Ma''am Aqsa.',
+ 6, 'academic', '2025-02-25', TRUE);
 
 -- ── Chat Groups ──────────────────────────────────────
 INSERT INTO chat_groups
   (id, name, group_type, offering_id, created_by, is_active, moderation_required)
 VALUES
-(1, 'Web Technologies - Section A',    'class',   1, 5, TRUE, FALSE),
-(2, 'Computer Networks - Section A',   'class',   2, 6, TRUE, FALSE),
-(3, 'Software Engineering - Section A','class',   3, 8, TRUE, FALSE),
-(4, 'Artificial Intelligence - Sec A', 'class',   4, 4, TRUE, FALSE),
-(5, 'IT Department General Chat',      'department', NULL, 4, TRUE, TRUE),
-(6, 'BSIT 2021 Batch Group',           'general', NULL, 1, TRUE, FALSE);
+(1, 'Database Administration - BSIT 8th',    'class',   1, 4, TRUE, FALSE),
+(2, 'OOP with Java - BSIT 8th',              'class',   2, 4, TRUE, FALSE),
+(3, 'Software Project Management - BSIT 8th','class',   3, 5, TRUE, FALSE),
+(4, 'Final Year Project - BSIT 8th',         'class',   4, 6, TRUE, FALSE),
+(5, 'BSIT 2021 Batch General Chat',          'general', NULL, 4, TRUE, FALSE);
 
 
 -- ── Chat Group Members ───────────────────────────────
 
--- Group 1 (Web Technologies) - Teacher + Enrolled Students
+-- Group 1 (Database Administration) - Mr. Ghulam Ghos + all 10 students
 INSERT INTO chat_group_members (group_id, user_id, role) VALUES
-(1, 5,  'teacher'),
-(1, 9,  'member'), (1, 10, 'member'), (1, 11, 'member'),
-(1, 12, 'member'), (1, 13, 'member'), (1, 19, 'member'),
-(1, 20, 'member'), (1, 21, 'member'), (1, 22, 'member'), (1, 23, 'member');
+(1, 4, 'teacher'),
+(1, 9, 'member'),(1, 10, 'member'),(1, 11, 'member'),(1, 12, 'member'),(1, 13, 'member'),
+(1, 14, 'member'),(1, 15, 'member'),(1, 16, 'member'),(1, 17, 'member'),(1, 18, 'member');
 
--- Group 2 (Computer Networks) - Teacher + Enrolled Students
+-- Group 2 (OOP with Java) - Mr. Ghulam Ghos + all 10 students
 INSERT INTO chat_group_members (group_id, user_id, role) VALUES
-(2, 6,  'teacher'),
-(2, 9,  'member'), (2, 10, 'member'), (2, 11, 'member'),
-(2, 14, 'member'), (2, 15, 'member'), (2, 16, 'member'),
-(2, 17, 'member'), (2, 18, 'member'), (2, 19, 'member'), (2, 20, 'member');
+(2, 4, 'teacher'),
+(2, 9, 'member'),(2, 10, 'member'),(2, 11, 'member'),(2, 12, 'member'),(2, 13, 'member'),
+(2, 14, 'member'),(2, 15, 'member'),(2, 16, 'member'),(2, 17, 'member'),(2, 18, 'member');
 
--- Group 4 (AI)
+-- Group 3 (Software Project Management) - Mr. Asif Raza + all 10 students
 INSERT INTO chat_group_members (group_id, user_id, role) VALUES
-(4, 4,  'teacher'),
-(4, 9,  'member'), (4, 11, 'member'), (4, 15, 'member'),
-(4, 18, 'member'), (4, 24, 'member');
+(3, 5, 'teacher'),
+(3, 9, 'member'),(3, 10, 'member'),(3, 11, 'member'),(3, 12, 'member'),(3, 13, 'member'),
+(3, 14, 'member'),(3, 15, 'member'),(3, 16, 'member'),(3, 17, 'member'),(3, 18, 'member');
 
--- Group 6 (BSIT 2021 Batch)
+-- Group 4 (FYP) - Ma'am Aqsa + all 10 students
 INSERT INTO chat_group_members (group_id, user_id, role) VALUES
-(6, 4,  'monitor'),
-(6, 9,  'member'), (6, 10, 'member'), (6, 11, 'member'),
-(6, 12, 'member'), (6, 13, 'member'), (6, 14, 'member'),
-(6, 15, 'member'), (6, 16, 'member'), (6, 17, 'member'), (6, 18, 'member');
+(4, 6, 'teacher'),
+(4, 9, 'member'),(4, 10, 'member'),(4, 11, 'member'),(4, 12, 'member'),(4, 13, 'member'),
+(4, 14, 'member'),(4, 15, 'member'),(4, 16, 'member'),(4, 17, 'member'),(4, 18, 'member');
+
+-- Group 5 (Batch General)
+INSERT INTO chat_group_members (group_id, user_id, role) VALUES
+(5, 4, 'monitor'),
+(5, 9, 'member'),(5, 10, 'member'),(5, 11, 'member'),(5, 12, 'member'),(5, 13, 'member'),
+(5, 14, 'member'),(5, 15, 'member'),(5, 16, 'member'),(5, 17, 'member'),(5, 18, 'member');
 
 
 -- ── Sample Messages ──────────────────────────────────
 INSERT INTO messages
   (group_id, sender_id, message, message_type, sent_at)
 VALUES
-(1, 5,  'Assalam o Alaikum! Welcome to Web Technologies class chat. Please use this group for course-related queries only.', 'system', '2025-02-03 09:00:00'),
-(1, 9,  'Walaikum Assalam Sir! Thank you for adding us.', 'text', '2025-02-03 09:05:00'),
-(1, 10, 'Sir, will assignment 1 require Bootstrap or pure CSS?', 'text', '2025-02-03 09:10:00'),
-(1, 5,  'Pure CSS and HTML only for Assignment 1. Bootstrap is optional for Assignment 2 onwards.', 'text', '2025-02-03 09:15:00'),
-(1, 12, 'Sir what is the file size limit for submission?', 'text', '2025-02-05 11:00:00'),
-(1, 5,  'Maximum 10MB per file. Compress your project folder before uploading.', 'text', '2025-02-05 11:05:00'),
-(1, 19, 'Sir can we use Flexbox in Assignment 1?', 'text', '2025-02-10 08:30:00'),
-(1, 5,  'Yes, Flexbox is allowed and encouraged!', 'text', '2025-02-10 08:35:00'),
+(1, 4,  'Assalam o Alaikum! Welcome to Database Administration class. Please use this group for course-related queries only.', 'system', '2025-02-03 08:00:00'),
+(1, 9,  'Walaikum Assalam Sir! Thank you for adding us.', 'text', '2025-02-03 08:05:00'),
+(1, 10, 'Sir, will we be using MySQL or Oracle for lab tasks?', 'text', '2025-02-03 08:10:00'),
+(1, 4,  'We will primarily use MySQL. Please install MySQL 8.0 before the first lab session.', 'text', '2025-02-03 08:15:00'),
+(1, 12, 'Sir what is the lab manual for Assignment 1?', 'text', '2025-02-05 09:00:00'),
+(1, 4,  'Install MySQL, create a database, add users and roles. Document with screenshots.', 'text', '2025-02-05 09:05:00'),
+(1, 18, 'Sir can we use XAMPP instead of standalone MySQL?', 'text', '2025-02-10 08:30:00'),
+(1, 4,  'Yes, XAMPP is fine. Make sure to use phpMyAdmin for user management screenshots.', 'text', '2025-02-10 08:35:00'),
 
-(2, 6,  'Welcome to Computer Networks group. Quiz 1 will be on Feb 11 during class. Prepare OSI model.', 'text', '2025-02-04 10:00:00'),
-(2, 9,  'Sir, should we memorize all 7 layers with protocols?', 'text', '2025-02-04 10:30:00'),
-(2, 6,  'Yes, know all layers with their functions and at least 2 protocols each.', 'text', '2025-02-04 10:35:00'),
-(2, 15, 'Sir is subnetting included in Quiz 1?', 'text', '2025-02-05 09:00:00'),
-(2, 6,  'No, subnetting will be in Quiz 2. Quiz 1 only covers OSI and TCP/IP.', 'text', '2025-02-05 09:05:00'),
+(2, 4,  'Welcome to OOP with Java! This semester we cover Java fundamentals, inheritance, interfaces and design patterns.', 'text', '2025-02-04 10:00:00'),
+(2, 9,  'Sir should we use Eclipse or IntelliJ?', 'text', '2025-02-04 10:30:00'),
+(2, 4,  'Both are fine. I recommend IntelliJ IDEA Community Edition. Download from jetbrains.com.', 'text', '2025-02-04 10:35:00'),
+(2, 14, 'Sir will we cover JavaFX this semester?', 'text', '2025-02-05 10:00:00'),
+(2, 4,  'Yes, in the last 3 weeks we will build a small JavaFX application. Stay consistent!', 'text', '2025-02-05 10:05:00'),
 
-(4, 4,  'Welcome AI class! This semester we cover search algorithms, ML basics, and neural networks.', 'text', '2025-02-03 14:00:00'),
-(4, 9,  'Sir which programming language will we use for implementations?', 'text', '2025-02-03 14:30:00'),
-(4, 4,  'Python primarily. Make sure you have Python 3.10+ installed with scikit-learn.', 'text', '2025-02-03 14:35:00'),
-(4, 24, 'Sir will we implement neural networks from scratch?', 'text', '2025-02-05 15:00:00'),
-(4, 4,  'We will use PyTorch for neural networks. No need to code from scratch.', 'text', '2025-02-05 15:05:00');
+(3, 5,  'Assalam o Alaikum! Welcome to Software Project Management. Please submit Assignment 1 project charter by Feb 28.', 'text', '2025-02-03 11:00:00'),
+(3, 11, 'Sir can we base the charter on our FYP project?', 'text', '2025-02-03 11:30:00'),
+(3, 5,  'Yes, use your FYP project for all assignments in this course. It will save time and improve depth.', 'text', '2025-02-03 11:35:00');
+
 -- =====================================================
 -- SEED 16: AI ANALYTICS + CHATBOT INTENTS + FAQS
 -- =====================================================
 USE AI_Driven_Smart_LMS;
 
 -- ── Student Performance Scores ───────────────────────
--- Semester 4 (Spring 2025) analytics for main students
 INSERT INTO student_performance_scores
   (student_id, semester_id, academic_score, consistency_index, improvement_index,
    engagement_level, class_rank, section_rank, trend_direction,
    risk_prediction, weak_subjects, recommendations, score_breakdown, calculated_at)
 VALUES
 (9, 4,
- 82.50, 78.00, 5.00, 'high', 2, 2, 'improving',
+ 85.00, 82.00, 5.00, 'high', 3, 3, 'improving',
  '{"level":"low","factors":[],"at_risk":false}',
  '[]',
  '[{"type":"general","priority":"low","message":"Great performance! Keep it up."}]',
- '{"lecture_attendance":87.50,"campus_presence":85.00,"assignment_consistency":88.89,"quiz_accuracy":90.00,"gpa_factor":100.00}',
+ '{"lecture_attendance":87.50,"campus_presence":88.00,"assignment_consistency":90.00,"quiz_accuracy":100.00,"gpa_factor":100.00}',
  '2025-02-26 12:00:00'),
 
 (10, 4,
- 94.20, 92.00, 8.00, 'high', 1, 1, 'improving',
+ 96.00, 94.00, 9.00, 'high', 1, 1, 'improving',
  '{"level":"low","factors":[],"at_risk":false}',
  '[]',
  '[{"type":"general","priority":"low","message":"Excellent! Top performer in class."}]',
- '{"lecture_attendance":100.00,"campus_presence":95.00,"assignment_consistency":100.00,"quiz_accuracy":90.00,"gpa_factor":100.00}',
+ '{"lecture_attendance":100.00,"campus_presence":98.00,"assignment_consistency":100.00,"quiz_accuracy":80.00,"gpa_factor":100.00}',
  '2025-02-26 12:00:00'),
 
 (11, 4,
- 58.30, 45.00, -3.00, 'low', 8, 8, 'declining',
+ 55.00, 42.00, -4.00, 'low', 10, 10, 'declining',
  '{"level":"high","factors":["Low lecture attendance","Missing assignments","Poor quiz performance"],"at_risk":true}',
- '[{"course":"Web Technologies","code":"IT-301","attendance":62.50,"reason":"Low attendance"}]',
- '[{"type":"attendance","priority":"high","message":"Attend more lectures to avoid shortage"},{"type":"assignment","priority":"high","message":"Submit assignments on time consistently"},{"type":"quiz","priority":"medium","message":"Practice AI quizzes to improve accuracy"}]',
- '{"lecture_attendance":62.50,"campus_presence":60.00,"assignment_consistency":55.56,"quiz_accuracy":60.00,"gpa_factor":75.00}',
+ '[{"course":"Database Administration","code":"IT-401","attendance":62.50,"reason":"Low attendance"}]',
+ '[{"type":"attendance","priority":"high","message":"Attend more lectures to avoid shortage"},{"type":"assignment","priority":"high","message":"Submit all pending assignments immediately"}]',
+ '{"lecture_attendance":62.50,"campus_presence":60.00,"assignment_consistency":50.00,"quiz_accuracy":60.00,"gpa_factor":50.00}',
  '2025-02-26 12:00:00'),
 
 (12, 4,
- 76.80, 70.00, 2.00, 'medium', 5, 5, 'stable',
+ 80.00, 75.00, 3.00, 'high', 4, 4, 'stable',
  '{"level":"low","factors":[],"at_risk":false}',
  '[]',
- '[{"type":"quiz","priority":"medium","message":"Practice AI quizzes to improve accuracy"}]',
- '{"lecture_attendance":87.50,"campus_presence":80.00,"assignment_consistency":77.78,"quiz_accuracy":70.00,"gpa_factor":91.75}',
+ '[{"type":"quiz","priority":"medium","message":"Practice more quiz questions to improve accuracy."}]',
+ '{"lecture_attendance":87.50,"campus_presence":85.00,"assignment_consistency":85.00,"quiz_accuracy":100.00,"gpa_factor":91.75}',
  '2025-02-26 12:00:00'),
 
 (13, 4,
- 62.50, 55.00, -1.00, 'medium', 7, 7, 'declining',
- '{"level":"medium","factors":["Low lecture attendance","Missing assignments"],"at_risk":true}',
- '[{"course":"Web Technologies","code":"IT-301","attendance":62.50,"reason":"Low attendance"}]',
- '[{"type":"attendance","priority":"high","message":"Attend more lectures to avoid shortage"},{"type":"assignment","priority":"high","message":"Submit assignments on time consistently"}]',
- '{"lecture_attendance":62.50,"campus_presence":65.00,"assignment_consistency":55.56,"quiz_accuracy":60.00,"gpa_factor":83.25}',
+ 68.00, 60.00, -1.00, 'medium', 7, 7, 'stable',
+ '{"level":"medium","factors":["Low lecture attendance","Late submission"],"at_risk":false}',
+ '[]',
+ '[{"type":"attendance","priority":"medium","message":"Improve attendance to secure grades"},{"type":"assignment","priority":"medium","message":"Avoid late submissions"}]',
+ '{"lecture_attendance":75.00,"campus_presence":70.00,"assignment_consistency":60.00,"quiz_accuracy":80.00,"gpa_factor":75.00}',
  '2025-02-26 12:00:00'),
 
-(19, 4,
- 88.40, 85.00, 6.00, 'high', 3, 3, 'improving',
+(14, 4,
+ 94.00, 90.00, 7.00, 'high', 2, 2, 'improving',
  '{"level":"low","factors":[],"at_risk":false}',
  '[]',
- '[{"type":"general","priority":"low","message":"Great performance! Keep it up."}]',
- '{"lecture_attendance":87.50,"campus_presence":90.00,"assignment_consistency":88.89,"quiz_accuracy":80.00,"gpa_factor":100.00}',
+ '[{"type":"general","priority":"low","message":"Outstanding performance! Maintain it."}]',
+ '{"lecture_attendance":100.00,"campus_presence":96.00,"assignment_consistency":95.00,"quiz_accuracy":100.00,"gpa_factor":100.00}',
  '2025-02-26 12:00:00'),
 
-(23, 4,
- 42.10, 30.00, -8.00, 'low', 10, 10, 'declining',
- '{"level":"high","factors":["Low lecture attendance","Missing assignments","Poor quiz performance","Low campus presence"],"at_risk":true}',
- '[{"course":"Web Technologies","code":"IT-301","attendance":37.50,"reason":"Low attendance"}]',
- '[{"type":"attendance","priority":"high","message":"Attend more lectures — shortage risk!"},{"type":"assignment","priority":"high","message":"Missing assignments will fail the course"},{"type":"subjects","priority":"high","message":"Focus on: Web Technologies"}]',
- '{"lecture_attendance":37.50,"campus_presence":40.00,"assignment_consistency":0.00,"quiz_accuracy":0.00,"gpa_factor":25.00}',
+(15, 4,
+ 78.00, 72.00, 2.00, 'medium', 5, 5, 'stable',
+ '{"level":"low","factors":[],"at_risk":false}',
+ '[]',
+ '[{"type":"general","priority":"low","message":"Good performance. Try to improve quiz scores."}]',
+ '{"lecture_attendance":87.50,"campus_presence":84.00,"assignment_consistency":85.00,"quiz_accuracy":80.00,"gpa_factor":83.25}',
+ '2025-02-26 12:00:00'),
+
+(16, 4,
+ 65.00, 58.00, -2.00, 'medium', 8, 8, 'declining',
+ '{"level":"medium","factors":["Low quiz performance","Missing assignment"],"at_risk":false}',
+ '[{"course":"OOP with Java","code":"IT-402","quiz_score":60.00,"reason":"Low quiz score"}]',
+ '[{"type":"quiz","priority":"high","message":"Practice OOP and Java concepts daily"},{"type":"assignment","priority":"high","message":"Submit missing Java assignment"}]',
+ '{"lecture_attendance":75.00,"campus_presence":72.00,"assignment_consistency":50.00,"quiz_accuracy":60.00,"gpa_factor":58.25}',
+ '2025-02-26 12:00:00'),
+
+(17, 4,
+ 76.00, 70.00, 1.00, 'medium', 6, 6, 'stable',
+ '{"level":"low","factors":[],"at_risk":false}',
+ '[]',
+ '[{"type":"general","priority":"low","message":"Decent performance. Focus on exam preparation."}]',
+ '{"lecture_attendance":87.50,"campus_presence":82.00,"assignment_consistency":75.00,"quiz_accuracy":80.00,"gpa_factor":91.75}',
+ '2025-02-26 12:00:00'),
+
+(18, 4,
+ 97.00, 95.00, 10.00, 'high', 1, 1, 'improving',
+ '{"level":"low","factors":[],"at_risk":false}',
+ '[]',
+ '[{"type":"general","priority":"low","message":"Exceptional performance! You are a top student."}]',
+ '{"lecture_attendance":100.00,"campus_presence":99.00,"assignment_consistency":100.00,"quiz_accuracy":100.00,"gpa_factor":100.00}',
  '2025-02-26 12:00:00');
 
 
 -- ── Chatbot Intents ──────────────────────────────────
-INSERT INTO chatbot_intents
-  (intent_name, description, category, example_queries, response_template, requires_auth, is_active)
-VALUES
+INSERT INTO chatbot_intents (intent_name, description, example_phrases, response_template, is_active) VALUES
 ('check_attendance',
- 'Student queries about their attendance percentage',
- 'academic',
- '["What is my attendance?","Show my attendance","Am I short in attendance?","How many classes did I miss?"]',
- 'Your attendance summary is available in your dashboard under the Attendance section.',
- TRUE, TRUE),
-
-('check_fee',
- 'Student queries about fee status and vouchers',
- 'financial',
- '["What is my fee status?","Is my fee submitted?","Show my fee voucher","How much fee is due?"]',
- 'You can check your fee status and vouchers in the Fee section of your student dashboard.',
- TRUE, TRUE),
+ 'Student asks about their attendance status',
+ '["What is my attendance?","How many classes have I missed?","Am I short in attendance?","Check my attendance"]',
+ 'Your current attendance in {course} is {percentage}%. You have attended {attended} out of {total} classes.',
+ TRUE),
 
 ('check_result',
- 'Student queries about exam results and grades',
- 'academic',
- '["What are my grades?","Show my result","What is my CGPA?","Did I pass?"]',
- 'Your results and grades are available in the Results section. CGPA is auto-calculated.',
- TRUE, TRUE),
+ 'Student asks about exam or quiz results',
+ '["What are my marks?","Show my result","How did I do in the midterm?","My quiz score"]',
+ 'Your result for {exam}: {obtained}/{total} marks. Grade: {grade}.',
+ TRUE),
 
-('check_schedule',
- 'Student queries about class schedule and timetable',
- 'academic',
- '["What is my schedule?","When is my next class?","Show timetable","What room is class in?"]',
- 'Your class schedule is visible in each enrolled course on your dashboard.',
- TRUE, TRUE),
+('fee_status',
+ 'Student asks about fee payment status',
+ '["Is my fee submitted?","Fee deadline?","Fee voucher status","How much fee is pending?"]',
+ 'Your fee voucher {voucher_no} status is {status}. Amount: Rs. {amount}. Due date: {due_date}.',
+ TRUE),
 
-('assignment_info',
- 'Student queries about assignments and deadlines',
- 'academic',
- '["When is assignment due?","Show my assignments","What are the assignment requirements?","Did I submit assignment?"]',
- 'Assignment details and deadlines are in each course under the Assignments tab.',
- TRUE, TRUE),
+('assignment_deadline',
+ 'Student asks about upcoming assignment deadlines',
+ '["When is the assignment due?","Assignment deadline?","Submission date?"]',
+ 'Assignment "{title}" for {course} is due on {due_date}. Total marks: {total_marks}.',
+ TRUE),
 
-('quiz_info',
- 'Student queries about quizzes',
- 'academic',
- '["Is there a quiz today?","Show quiz schedule","How many quizzes are there?","Practice quiz"]',
- 'You can view and attempt quizzes from your course page. AI practice quizzes are also available.',
- TRUE, TRUE),
-
-('contact_teacher',
- 'Student wants to contact teacher',
- 'communication',
- '["How to contact teacher?","Teacher email?","Can I message teacher?"]',
- 'Use the class group chat to message your teacher directly.',
- TRUE, TRUE),
-
-('exam_schedule',
- 'Student queries about exam dates',
- 'academic',
- '["When is the exam?","Exam schedule?","Midterm date?","Final exam when?"]',
- 'Exam schedules are announced via announcements and notice board. Check there for latest updates.',
- TRUE, TRUE),
-
-('general_help',
- 'General help and greeting',
- 'general',
- '["Help","Hi","Hello","What can you do?","How to use LMS?"]',
- 'I can help with attendance, fees, results, schedule, assignments, quizzes, and more. Just ask!',
- FALSE, TRUE);
-
+('timetable',
+ 'Student asks about class schedule',
+ '["What is my timetable?","When is the next class?","Class schedule","When does DBA class start?"]',
+ 'Your timetable for Spring 2025: DBA - Mon/Wed 08:00-09:30 | OOP Java - Tue/Thu 10:00-11:30 | SPM - Mon/Fri 11:00-12:30 | FYP - Wed/Fri 14:00-15:30.',
+ TRUE);
 
 -- ── Chatbot FAQs ─────────────────────────────────────
-INSERT INTO chatbot_faqs
-  (question, answer, category, tags, helpful_count, view_count, is_active)
-VALUES
-('How can I check my attendance percentage?',
- 'Log in to your student dashboard and click on "Attendance" in the left sidebar. You will see attendance summary for each course including total classes, attended classes, and percentage. If your attendance falls below 75%, an alert will be shown.',
- 'academic',
- '["attendance","percentage","dashboard"]',
- 45, 120, TRUE),
+INSERT INTO chatbot_faqs (question, answer, category, is_active) VALUES
+('How do I check my attendance?',
+ 'Login to the LMS, go to My Courses, select any course and click on Attendance to see your detailed attendance record.',
+ 'attendance', TRUE),
 
-('What happens if my attendance is below 75%?',
- 'If your attendance drops below 75% in any course, you will receive an alert notification. You may be debarred from the final exam for that course. Contact your teacher immediately if you have valid reasons for absences.',
- 'academic',
- '["attendance","shortage","exam","debarred"]',
- 38, 95, TRUE),
+('What is the minimum attendance requirement?',
+ 'The minimum required attendance is 75%. Students below 75% will not be allowed to appear in final exams.',
+ 'attendance', TRUE),
 
-('How do I submit my fee?',
- 'Download your fee voucher from the Fee section in your dashboard. You can pay at any branch of HBL, MCB, or UBL using the voucher number. For online payment, use JazzCash or Easypaisa with the provided reference number.',
- 'financial',
- '["fee","payment","voucher","bank"]',
- 62, 180, TRUE),
+('How do I submit an assignment?',
+ 'Go to My Courses > select the course > Assignments > click Submit on the relevant assignment and upload your file.',
+ 'assignments', TRUE),
 
-('How is my CGPA calculated?',
- 'CGPA is calculated based on all completed courses. Each course contributes based on credit hours and grade points: A+=4.0, A=4.0, A-=3.67, B+=3.33, B=3.0, B-=2.67, C+=2.33, C=2.0, D=1.0, F=0.0.',
- 'academic',
- '["cgpa","gpa","grades","calculation"]',
- 55, 160, TRUE),
+('What file formats are allowed for assignment submission?',
+ 'Allowed formats are .pdf, .docx, .java, .zip, .sql depending on the assignment. Check each assignment description for specific requirements.',
+ 'assignments', TRUE),
 
-('How to attempt an online quiz?',
- 'Go to your course page and click on Quizzes tab. Click "Attempt Quiz" on any available quiz. Once started, answer all questions within the time limit and click Submit. Results are shown immediately after submission.',
- 'academic',
- '["quiz","attempt","online","submit"]',
- 41, 135, TRUE),
+('How do I contact my teacher?',
+ 'You can use the Chat section in your course group, or email your teacher directly. Mr. Ghulam Ghos: ghulam.ghos@bzu.edu.pk | Mr. Asif Raza: asif.raza@bzu.edu.pk',
+ 'general', TRUE),
 
-('How can I use the AI practice quiz?',
- 'Go to AI Practice Quiz section in your dashboard. Select your course, enter a topic, choose difficulty level (easy/medium/hard), and click Generate. The AI will create MCQs for you to practice. After completion, you will see your score and weak areas.',
- 'academic',
- '["ai quiz","practice","generate","mcq"]',
- 30, 88, TRUE),
+('When are the midterm exams?',
+ 'Midterm exams for Spring 2025 commence on March 15, 2025. DBA Midterm: March 15 | OOP Java Midterm: March 17 | SPM Midterm: March 18 | FYP Evaluation: March 20.',
+ 'exams', TRUE),
 
-('What is the minimum passing grade?',
- 'The minimum passing grade is D (50% marks). However, for graduation requirement, you need a minimum CGPA of 2.0. Courses with F grade must be repeated.',
- 'academic',
- '["passing","grade","minimum","fail"]',
- 48, 142, TRUE),
+('How do I get a duplicate fee challan?',
+ 'Contact the accounts department in person or email accounts@bzu.edu.pk with your roll number to request a duplicate fee challan.',
+ 'fees', TRUE);
 
-('How to join class group chat?',
- 'You are automatically added to group chats for all your enrolled courses. Go to Chat section in your dashboard to see all your groups. You can message your classmates and teacher directly.',
- 'communication',
- '["chat","group","message","teacher"]',
- 25, 72, TRUE),
-
-('Can I add or drop a course after registration?',
- 'Yes, you can add or drop courses within the add/drop period specified in the academic calendar. Go to Course Registration and click Add/Drop. You need advisor approval for some changes.',
- 'academic',
- '["add drop","course","registration","advisor"]',
- 33, 98, TRUE),
-
-('How to download my fee voucher?',
- 'Login to your dashboard and go to Fee Management section. Click on the relevant semester voucher and click "Download Voucher" button. A PDF will be generated with all payment details.',
- 'financial',
- '["voucher","download","fee","pdf"]',
- 29, 85, TRUE);
--- =====================================================
--- SEED 17: AI QUIZZES + CAMPUS ATTENDANCE LOGS
--- =====================================================
-USE AI_Driven_Smart_LMS;
-
--- ── AI Practice Quiz History ─────────────────────────
+-- ── AI Quizzes ───────────────────────────────────────
 INSERT INTO ai_quizzes
-  (student_id, course_id, topic, difficulty, questions_generated, student_answers, score, feedback, weak_areas_identified)
+  (student_id, offering_id, topic, difficulty, questions_json, correct_answers_json, score_percentage, feedback, weak_areas)
 VALUES
-(9, 7, 'JavaScript Basics', 'medium',
- '[{"id":1,"question":"What is a closure in JavaScript?","options":["A loop","A function with access to outer scope","A variable type","An event"],"correct_answer":"A function with access to outer scope","explanation":"Closures allow functions to access variables from outer scope even after execution."},{"id":2,"question":"What does DOM stand for?","options":["Document Object Model","Data Object Model","Document Order Model","Dynamic Object Model"],"correct_answer":"Document Object Model","explanation":"DOM is the Document Object Model, representing the HTML structure as objects."},{"id":3,"question":"Which method adds an element to the end of an array?","options":["push()","pop()","shift()","unshift()"],"correct_answer":"push()","explanation":"push() adds one or more elements to the end of an array."},{"id":4,"question":"What is the output of typeof null?","options":["null","undefined","object","string"],"correct_answer":"object","explanation":"typeof null returns object due to a historical JavaScript bug."},{"id":5,"question":"Which event fires when page loads?","options":["onload","onclick","onchange","onfocus"],"correct_answer":"onload","explanation":"onload event fires when the page has fully loaded."}]',
- '{"1":"A function with access to outer scope","2":"Document Object Model","3":"push()","4":"object","5":"onclick"}',
- 80.00, 'Good performance! Review event handling.', '["Which event fires when page loads?"]'),
+(9, 1, 'Database Indexing', 'medium',
+ '[{"id":1,"question":"What type of index is automatically created on a PRIMARY KEY?","options":["Unique Index","Clustered Index","Full-text Index","Composite Index"],"correct_answer":"Clustered Index","explanation":"Primary keys automatically create clustered indexes in most RDBMS."},{"id":2,"question":"Which SQL command is used to create an index?","options":["MAKE INDEX","CREATE INDEX","ADD INDEX","INDEX ON"],"correct_answer":"CREATE INDEX","explanation":"CREATE INDEX is the standard SQL command to create an index on a table column."},{"id":3,"question":"What is the disadvantage of too many indexes?","options":["Faster SELECT","Slower INSERT/UPDATE","Increased memory","Both B and C"],"correct_answer":"Both B and C","explanation":"Too many indexes slow down write operations and consume extra disk space."}]',
+ '{"1":"Clustered Index","2":"CREATE INDEX","3":"Both B and C"}',
+ 100.00, 'Perfect! Excellent understanding of database indexing.', '[]'),
 
-(10, 7, 'CSS Advanced', 'hard',
- '[{"id":1,"question":"What is specificity in CSS?","options":["Font weight","Priority of CSS rules","Page layout","Animation speed"],"correct_answer":"Priority of CSS rules","explanation":"Specificity determines which CSS rule is applied when multiple rules target the same element."},{"id":2,"question":"What is the z-index property?","options":["Horizontal position","Vertical position","Stack order","Opacity"],"correct_answer":"Stack order","explanation":"z-index controls the vertical stacking order of elements."},{"id":3,"question":"What does display: flex do?","options":["Hides element","Creates block element","Enables flexbox layout","Sets font size"],"correct_answer":"Enables flexbox layout","explanation":"display: flex turns an element into a flex container."},{"id":4,"question":"What is the CSS box model?","options":["Layout model","Color model","Grid model","Font model"],"correct_answer":"Layout model","explanation":"The CSS box model describes the rectangular boxes around elements."},{"id":5,"question":"What is a CSS pseudo-class?","options":["A fake class","A state-based selector","An HTML tag","A color value"],"correct_answer":"A state-based selector","explanation":"Pseudo-classes like :hover select elements based on state."}]',
- '{"1":"Priority of CSS rules","2":"Stack order","3":"Enables flexbox layout","4":"Layout model","5":"A state-based selector"}',
- 100.00, 'Perfect! Outstanding CSS knowledge.', '[]'),
+(11, 1, 'Database Backup', 'easy',
+ '[{"id":1,"question":"What does a full backup include?","options":["Changed data only","All database data","Only transaction logs","Index data only"],"correct_answer":"All database data","explanation":"A full backup includes a complete copy of all database data."},{"id":2,"question":"Which backup type is fastest to restore?","options":["Incremental","Differential","Full","Log"],"correct_answer":"Full","explanation":"Full backups are fastest to restore as all data is in one backup set."},{"id":3,"question":"What is a transaction log backup used for?","options":["Schema backup","Point-in-time recovery","Index backup","User backup"],"correct_answer":"Point-in-time recovery","explanation":"Transaction log backups allow point-in-time recovery of a database."}]',
+ '{"1":"Changed data only","2":"Full","3":"Index backup"}',
+ 33.33, 'Needs improvement. Review backup types and recovery strategies.', '["Backup Types","Recovery Strategies"]'),
 
-(11, 7, 'HTML Forms', 'easy',
- '[{"id":1,"question":"Which tag creates a form in HTML?","options":["<input>","<form>","<button>","<field>"],"correct_answer":"<form>","explanation":"The <form> tag creates an HTML form."},{"id":2,"question":"What attribute makes an input field required?","options":["mandatory","required","must","validate"],"correct_answer":"required","explanation":"The required attribute makes a field mandatory."},{"id":3,"question":"What type attribute creates a password field?","options":["hidden","text","password","secure"],"correct_answer":"password","explanation":"type=password creates a masked input field."}]',
- '{"1":"<form>","2":"required","3":"text"}',
- 66.67, 'Review password field and input types.', '["What type attribute creates a password field?"]'),
-
-(9, 8, 'IP Addressing', 'medium',
- '[{"id":1,"question":"How many classes of IP addresses are there?","options":["3","5","7","4"],"correct_answer":"5","explanation":"IPv4 addresses are divided into 5 classes: A, B, C, D, E."},{"id":2,"question":"What is a subnet mask?","options":["IP address range","Network identifier","Device name","Gateway address"],"correct_answer":"Network identifier","explanation":"Subnet mask identifies which part of an IP is the network address."},{"id":3,"question":"What is the loopback address?","options":["192.168.1.1","10.0.0.1","127.0.0.1","172.16.0.1"],"correct_answer":"127.0.0.1","explanation":"127.0.0.1 is the loopback address used to test network software."}]',
- '{"1":"5","2":"Network identifier","3":"127.0.0.1"}',
- 100.00, 'Excellent! Perfect score on IP addressing.', '[]');
+(10, 2, 'Java Inheritance', 'medium',
+ '[{"id":1,"question":"Can a Java class extend multiple classes?","options":["Yes","No","Only abstract classes","Only interfaces"],"correct_answer":"No","explanation":"Java does not support multiple inheritance through classes. Use interfaces instead."},{"id":2,"question":"Which keyword is used to call parent class constructor in Java?","options":["parent()","base()","super()","this()"],"correct_answer":"super()","explanation":"super() is used to call the parent class constructor in Java."},{"id":3,"question":"What is the default parent class of all Java classes?","options":["AbstractClass","BaseClass","Object","Main"],"correct_answer":"Object","explanation":"All Java classes implicitly extend the Object class from java.lang package."}]',
+ '{"1":"No","2":"super()","3":"Object"}',
+ 100.00, 'Excellent! Perfect score on Java Inheritance.', '[]');
 
 
 -- ── Campus Attendance Logs ───────────────────────────
--- Entry logs for main students (Feb 2025)
 INSERT INTO campus_attendance
   (student_id, gate_id, camera_id, entry_time, exit_time, entry_direction,
    face_match_confidence, processing_time_ms, spoof_check_passed, liveness_score,
    is_duplicate_filtered, manual_override)
 VALUES
--- Student 9 (Ali) - Regular attendee
-(9, 1, 1, '2025-02-03 07:45:00', '2025-02-03 14:30:00', 'in',  96.50, 245, TRUE, 0.92, FALSE, FALSE),
-(9, 1, 1, '2025-02-04 08:10:00', '2025-02-04 13:45:00', 'in',  97.20, 231, TRUE, 0.94, FALSE, FALSE),
-(9, 1, 1, '2025-02-05 07:55:00', '2025-02-05 14:00:00', 'in',  96.90, 252, TRUE, 0.93, FALSE, FALSE),
-(9, 1, 1, '2025-02-06 08:05:00', '2025-02-06 15:30:00', 'in',  95.60, 248, TRUE, 0.90, FALSE, FALSE),
-(9, 1, 1, '2025-02-10 07:50:00', '2025-02-10 14:20:00', 'in',  97.10, 239, TRUE, 0.92, FALSE, FALSE),
-(9, 1, 1, '2025-02-11 08:00:00', '2025-02-11 13:30:00', 'in',  96.30, 244, TRUE, 0.91, FALSE, FALSE),
-(9, 1, 1, '2025-02-12 08:15:00', '2025-02-12 14:45:00', 'in',  97.50, 235, TRUE, 0.95, FALSE, FALSE),
-(9, 1, 1, '2025-02-13 07:45:00', '2025-02-13 13:00:00', 'in',  96.80, 241, TRUE, 0.93, FALSE, FALSE),
-(9, 1, 1, '2025-02-17 08:00:00', '2025-02-17 14:30:00', 'in',  97.00, 237, TRUE, 0.92, FALSE, FALSE),
-(9, 1, 1, '2025-02-18 08:20:00', '2025-02-18 15:00:00', 'in',  96.40, 250, TRUE, 0.90, FALSE, FALSE),
-(9, 1, 1, '2025-02-19 07:55:00', '2025-02-19 14:15:00', 'in',  97.30, 243, TRUE, 0.94, FALSE, FALSE),
+-- Sarfraz (9) - Regular attendee
+(9, 1, 1, '2025-02-03 07:45:00', '2025-02-03 14:30:00', 'in', 96.50, 245, TRUE, 0.92, FALSE, FALSE),
+(9, 1, 1, '2025-02-04 08:10:00', '2025-02-04 13:45:00', 'in', 97.20, 231, TRUE, 0.94, FALSE, FALSE),
+(9, 1, 1, '2025-02-05 07:55:00', '2025-02-05 14:00:00', 'in', 96.90, 252, TRUE, 0.93, FALSE, FALSE),
+(9, 1, 1, '2025-02-10 08:05:00', '2025-02-10 15:30:00', 'in', 95.60, 248, TRUE, 0.90, FALSE, FALSE),
+(9, 1, 1, '2025-02-17 07:50:00', '2025-02-17 14:20:00', 'in', 97.10, 239, TRUE, 0.92, FALSE, FALSE),
 
--- Student 10 (Sara) - Very regular
+-- Zain Arain (10) - Perfect attendee
 (10, 1, 1, '2025-02-03 07:30:00', '2025-02-03 15:00:00', 'in', 98.20, 220, TRUE, 0.97, FALSE, FALSE),
 (10, 1, 1, '2025-02-04 07:35:00', '2025-02-04 14:30:00', 'in', 97.80, 225, TRUE, 0.96, FALSE, FALSE),
 (10, 1, 1, '2025-02-05 07:40:00', '2025-02-05 15:10:00', 'in', 98.50, 218, TRUE, 0.98, FALSE, FALSE),
-(10, 1, 1, '2025-02-06 07:25:00', '2025-02-06 14:45:00', 'in', 98.10, 222, TRUE, 0.97, FALSE, FALSE),
-(10, 1, 1, '2025-02-10 07:45:00', '2025-02-10 15:20:00', 'in', 97.90, 228, TRUE, 0.96, FALSE, FALSE),
-(10, 1, 1, '2025-02-11 07:30:00', '2025-02-11 14:00:00', 'in', 98.30, 219, TRUE, 0.97, FALSE, FALSE),
-(10, 1, 1, '2025-02-12 07:50:00', '2025-02-12 15:30:00', 'in', 98.00, 224, TRUE, 0.96, FALSE, FALSE),
+(10, 1, 1, '2025-02-10 07:25:00', '2025-02-10 14:45:00', 'in', 98.10, 222, TRUE, 0.97, FALSE, FALSE),
+(10, 1, 1, '2025-02-17 07:45:00', '2025-02-17 15:20:00', 'in', 97.90, 228, TRUE, 0.96, FALSE, FALSE),
 
--- Student 11 (Usman) - Irregular
+-- Moeez Israr (11) - Irregular
 (11, 1, 1, '2025-02-03 09:15:00', '2025-02-03 12:30:00', 'in', 94.30, 265, TRUE, 0.88, FALSE, FALSE),
-(11, 1, 1, '2025-02-06 10:00:00', '2025-02-06 13:00:00', 'in', 93.80, 270, TRUE, 0.87, FALSE, FALSE),
-(11, 1, 1, '2025-02-11 11:30:00', '2025-02-11 14:00:00', 'in', 94.50, 260, TRUE, 0.89, FALSE, FALSE),
-(11, 1, 1, '2025-02-13 09:45:00', '2025-02-13 12:15:00', 'in', 93.60, 268, TRUE, 0.86, FALSE, FALSE),
+(11, 1, 1, '2025-02-10 10:00:00', '2025-02-10 13:00:00', 'in', 93.80, 270, TRUE, 0.87, FALSE, FALSE),
+(11, 1, 1, '2025-02-17 11:30:00', '2025-02-17 14:00:00', 'in', 94.50, 260, TRUE, 0.89, FALSE, FALSE),
 
--- Student 23 (Danish) - Very irregular / problematic
-(23, 1, 1, '2025-02-05 11:00:00', '2025-02-05 13:00:00', 'in', 92.10, 280, TRUE, 0.85, FALSE, FALSE),
-(23, 1, 1, '2025-02-13 10:30:00', '2025-02-13 12:30:00', 'in', 91.80, 285, TRUE, 0.84, FALSE, FALSE);
-
+-- Haiqa (18) - Perfect
+(18, 1, 1, '2025-02-03 07:20:00', '2025-02-03 15:00:00', 'in', 98.80, 215, TRUE, 0.98, FALSE, FALSE),
+(18, 1, 1, '2025-02-04 07:25:00', '2025-02-04 14:45:00', 'in', 98.60, 218, TRUE, 0.97, FALSE, FALSE),
+(18, 1, 1, '2025-02-05 07:30:00', '2025-02-05 15:30:00', 'in', 99.00, 210, TRUE, 0.99, FALSE, FALSE);
 
 -- ── Face Recognition Attempt Logs ────────────────────
 INSERT INTO face_recognition_logs
@@ -1204,72 +1023,42 @@ VALUES
 (9,    1, 1, 96.50, TRUE,  245, TRUE, 0.92),
 (10,   1, 1, 98.20, TRUE,  220, TRUE, 0.97),
 (11,   1, 1, 94.30, TRUE,  265, TRUE, 0.88),
+(18,   1, 1, 98.80, TRUE,  215, TRUE, 0.98),
 (NULL, 1, 1, 45.20, FALSE, 312, FALSE, 0.42),
-(NULL, 1, 1, 38.50, FALSE, 325, TRUE,  0.35),
-(9,    1, 1, 97.20, TRUE,  231, TRUE, 0.94),
-(23,   1, 1, 92.10, TRUE,  280, TRUE, 0.85);
+(NULL, 1, 1, 38.50, FALSE, 325, TRUE,  0.35);
+
 
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- ── Verify Data ──────────────────────────────────────
 SELECT 'departments'              AS table_name, COUNT(*) AS records FROM departments
-UNION ALL
-SELECT 'programs',                               COUNT(*) FROM programs
-UNION ALL
-SELECT 'semesters',                              COUNT(*) FROM semesters
-UNION ALL
-SELECT 'courses',                                COUNT(*) FROM courses
-UNION ALL
-SELECT 'users',                                  COUNT(*) FROM users
-UNION ALL
-SELECT 'student_profiles',                       COUNT(*) FROM student_profiles
-UNION ALL
-SELECT 'teacher_profiles',                       COUNT(*) FROM teacher_profiles
-UNION ALL
-SELECT 'course_offerings',                       COUNT(*) FROM course_offerings
-UNION ALL
-SELECT 'enrollments',                            COUNT(*) FROM enrollments
-UNION ALL
-SELECT 'lecture_sessions',                       COUNT(*) FROM lecture_sessions
-UNION ALL
-SELECT 'lecture_attendance',                     COUNT(*) FROM lecture_attendance
-UNION ALL
-SELECT 'campus_gates',                           COUNT(*) FROM campus_gates
-UNION ALL
-SELECT 'campus_attendance',                      COUNT(*) FROM campus_attendance
-UNION ALL
-SELECT 'assignments',                            COUNT(*) FROM assignments
-UNION ALL
-SELECT 'assignment_submissions',                 COUNT(*) FROM assignment_submissions
-UNION ALL
-SELECT 'quizzes',                                COUNT(*) FROM quizzes
-UNION ALL
-SELECT 'quiz_questions',                         COUNT(*) FROM quiz_questions
-UNION ALL
-SELECT 'quiz_attempts',                          COUNT(*) FROM quiz_attempts
-UNION ALL
-SELECT 'exams',                                  COUNT(*) FROM exams
-UNION ALL
-SELECT 'exam_results',                           COUNT(*) FROM exam_results
-UNION ALL
-SELECT 'fee_structure',                          COUNT(*) FROM fee_structure
-UNION ALL
-SELECT 'fee_vouchers',                           COUNT(*) FROM fee_vouchers
-UNION ALL
-SELECT 'fee_payments',                           COUNT(*) FROM fee_payments
-UNION ALL
-SELECT 'announcements',                          COUNT(*) FROM announcements
-UNION ALL
-SELECT 'notice_board',                           COUNT(*) FROM notice_board
-UNION ALL
-SELECT 'chat_groups',                            COUNT(*) FROM chat_groups
-UNION ALL
-SELECT 'messages',                               COUNT(*) FROM messages
-UNION ALL
-SELECT 'student_performance_scores',             COUNT(*) FROM student_performance_scores
-UNION ALL
-SELECT 'chatbot_intents',                        COUNT(*) FROM chatbot_intents
-UNION ALL
-SELECT 'chatbot_faqs',                           COUNT(*) FROM chatbot_faqs
-UNION ALL
-SELECT 'ai_quizzes',                             COUNT(*) FROM ai_quizzes;
+UNION ALL SELECT 'programs',                               COUNT(*) FROM programs
+UNION ALL SELECT 'semesters',                              COUNT(*) FROM semesters
+UNION ALL SELECT 'courses',                                COUNT(*) FROM courses
+UNION ALL SELECT 'users',                                  COUNT(*) FROM users
+UNION ALL SELECT 'student_profiles',                       COUNT(*) FROM student_profiles
+UNION ALL SELECT 'teacher_profiles',                       COUNT(*) FROM teacher_profiles
+UNION ALL SELECT 'course_offerings',                       COUNT(*) FROM course_offerings
+UNION ALL SELECT 'enrollments',                            COUNT(*) FROM enrollments
+UNION ALL SELECT 'lecture_sessions',                       COUNT(*) FROM lecture_sessions
+UNION ALL SELECT 'lecture_attendance',                     COUNT(*) FROM lecture_attendance
+UNION ALL SELECT 'campus_gates',                           COUNT(*) FROM campus_gates
+UNION ALL SELECT 'campus_attendance',                      COUNT(*) FROM campus_attendance
+UNION ALL SELECT 'assignments',                            COUNT(*) FROM assignments
+UNION ALL SELECT 'assignment_submissions',                 COUNT(*) FROM assignment_submissions
+UNION ALL SELECT 'quizzes',                                COUNT(*) FROM quizzes
+UNION ALL SELECT 'quiz_questions',                         COUNT(*) FROM quiz_questions
+UNION ALL SELECT 'quiz_attempts',                          COUNT(*) FROM quiz_attempts
+UNION ALL SELECT 'exams',                                  COUNT(*) FROM exams
+UNION ALL SELECT 'exam_results',                           COUNT(*) FROM exam_results
+UNION ALL SELECT 'fee_structure',                          COUNT(*) FROM fee_structure
+UNION ALL SELECT 'fee_vouchers',                           COUNT(*) FROM fee_vouchers
+UNION ALL SELECT 'fee_payments',                           COUNT(*) FROM fee_payments
+UNION ALL SELECT 'announcements',                          COUNT(*) FROM announcements
+UNION ALL SELECT 'notice_board',                           COUNT(*) FROM notice_board
+UNION ALL SELECT 'chat_groups',                            COUNT(*) FROM chat_groups
+UNION ALL SELECT 'messages',                               COUNT(*) FROM messages
+UNION ALL SELECT 'student_performance_scores',             COUNT(*) FROM student_performance_scores
+UNION ALL SELECT 'chatbot_intents',                        COUNT(*) FROM chatbot_intents
+UNION ALL SELECT 'chatbot_faqs',                           COUNT(*) FROM chatbot_faqs
+UNION ALL SELECT 'ai_quizzes',                             COUNT(*) FROM ai_quizzes;

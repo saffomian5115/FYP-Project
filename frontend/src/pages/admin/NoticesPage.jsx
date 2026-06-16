@@ -449,7 +449,6 @@ function DockIcon({ item, active, onChange, mouseX }) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          border: 'none',
           cursor: 'pointer',
           background: isActive
             ? 'linear-gradient(145deg, var(--neu-surface-deep), var(--neu-surface))'
@@ -457,7 +456,9 @@ function DockIcon({ item, active, onChange, mouseX }) {
           boxShadow: isActive
             ? `inset 3px 3px 7px var(--neu-shadow-dark), inset -2px -2px 5px var(--neu-shadow-light)`
             : `5px 5px 12px var(--neu-shadow-dark), -3px -3px 8px var(--neu-shadow-light), inset 0 1px 0 rgba(255,255,255,0.6)`,
-          border: `1px solid var(--neu-border)`,
+          border: isActive 
+            ? '1px solid var(--neu-border)' 
+            : 'none',
           color: isActive ? 'var(--neu-text-primary)' : 'var(--neu-text-muted)',
           transition: [
             'width 0.14s cubic-bezier(0.34,1.56,0.64,1)',
