@@ -71,7 +71,7 @@ function Modal({ children, maxW = 520 }) {
   return (
     <div style={{
       position: 'fixed', inset: 0, background: 'rgba(8,12,20,.7)',
-      backdropFilter: 'blur(10px)', zIndex: 50,
+      backdropFilter: 'blur(10px)', zIndex: 150,
       display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem',
     }}>
       <div style={{

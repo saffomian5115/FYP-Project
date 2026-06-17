@@ -104,7 +104,7 @@ function Modal({ children, maxW = 420 }) {
         inset: 0,
         background: "rgba(8,12,20,.7)",
         backdropFilter: "blur(10px)",
-        zIndex: 50,
+        zIndex: 150,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

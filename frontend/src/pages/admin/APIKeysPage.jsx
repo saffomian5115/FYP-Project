@@ -86,7 +86,7 @@ function AddKeyModal({ onClose, onAdded }) {
   }
 
   return (
-    <div style={{ position: 'fixed', inset: 0, background: 'rgba(10,14,22,0.65)', backdropFilter: 'blur(8px)', zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
+    <div style={{ position: 'fixed', inset: 0, background: 'rgba(10,14,22,0.65)', backdropFilter: 'blur(8px)', zIndex: 150, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
       <div style={{ ...neu({ borderRadius: '1.5rem', padding: '1.75rem', width: '100%', maxWidth: 480 }), boxShadow: 'var(--neu-raised-lg)' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>

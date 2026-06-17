@@ -552,7 +552,7 @@ export default function ChatPage() {
   const selectedColor = selected ? getGroupColor(selected.name || "") : "#5b8af0";
 
   return (
-    <div style={{ height: "100vh", display: "flex", flexDirection: "column", background: "var(--neu-bg)" }}>
+    <div style={{ maxWidth: "100vw", margin: "0 auto" }}>
       <style>{`
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
@@ -565,8 +565,8 @@ export default function ChatPage() {
         .msg-scroll::-webkit-scrollbar-thumb { background: var(--neu-border); border-radius: 5px; }
       `}</style>
 
-      {/* Main container - Full height chat layout */}
-      <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
+      {/* Main container - Full height chat layout */}          <div style={{ padding: 0, overflow: "hidden", display: "flex", height: "85vh", minHeight: 500 }}
+        >
         
         {/* ════ LEFT: Group Sidebar ════ */}
         <div

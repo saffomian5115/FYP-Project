@@ -57,7 +57,7 @@ function Modal({ children, wide }) {
       position: 'fixed', inset: 0,
       background: 'rgba(10,14,22,0.6)',
       backdropFilter: 'blur(8px)',
-      zIndex: 50,
+      zIndex: 150,
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       padding: '1rem',
     }}>
