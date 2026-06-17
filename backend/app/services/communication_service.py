@@ -380,6 +380,144 @@ class ChatService:
         )
 
     @staticmethod
+    def sync_user_groups(db: Session, user) -> int:
+        """
+        Auto-create chat groups for a user based on their role:
+        - Student: ensures a group exists for each enrolled course offering
+        - Teacher: ensures a group exists for each taught course offering
+        Also adds the user (and relevant others) as group members.
+        Returns the number of new groups created.
+        """
+        from app.models.enrollment import Enrollment, CourseOffering
+
+        groups_created = 0
+
+        if user.role == "student":
+            enrollments = db.query(Enrollment).filter(
+                Enrollment.student_id == user.id,
+                Enrollment.status == "enrolled"
+            ).all()
+
+            for enrollment in enrollments:
+                offering = db.query(CourseOffering).filter(
+                    CourseOffering.id == enrollment.offering_id
+                ).first()
+                if not offering:
+                    continue
+
+                # Check if group exists for this offering
+                group = db.query(ChatGroup).filter(
+                    ChatGroup.offering_id == offering.id,
+                    ChatGroup.group_type == "class"
+                ).first()
+
+                if not group:
+                    course_name = offering.course.name if offering.course else "Course"
+                    group = ChatGroup(
+                        name=f"{course_name} - Section {offering.section}",
+                        group_type="class",
+                        offering_id=offering.id,
+                        created_by=user.id,
+                        is_active=True,
+                        moderation_required=True
+                    )
+                    db.add(group)
+                    db.flush()
+                    groups_created += 1
+
+                # Add teacher as member (teacher role) if not already
+                teacher_user_id = offering.instructor_id
+                if teacher_user_id:
+                    existing = db.query(ChatGroupMember).filter(
+                        ChatGroupMember.group_id == group.id,
+                        ChatGroupMember.user_id == teacher_user_id
+                    ).first()
+                    if not existing:
+                        teacher_member = ChatGroupMember(
+                            group_id=group.id,
+                            user_id=teacher_user_id,
+                            role="teacher"
+                        )
+                        db.add(teacher_member)
+
+                # Add student as member (member role) if not already
+                existing_member = db.query(ChatGroupMember).filter(
+                    ChatGroupMember.group_id == group.id,
+                    ChatGroupMember.user_id == user.id
+                ).first()
+                if not existing_member:
+                    member = ChatGroupMember(
+                        group_id=group.id,
+                        user_id=user.id,
+                        role="member"
+                    )
+                    db.add(member)
+
+            db.commit()
+
+        elif user.role == "teacher":
+            offerings = db.query(CourseOffering).filter(
+                CourseOffering.instructor_id == user.id,
+                CourseOffering.is_active == True
+            ).all()
+
+            for offering in offerings:
+                # Check if group exists for this offering
+                group = db.query(ChatGroup).filter(
+                    ChatGroup.offering_id == offering.id,
+                    ChatGroup.group_type == "class"
+                ).first()
+
+                if not group:
+                    course_name = offering.course.name if offering.course else "Course"
+                    group = ChatGroup(
+                        name=f"{course_name} - Section {offering.section}",
+                        group_type="class",
+                        offering_id=offering.id,
+                        created_by=user.id,
+                        is_active=True,
+                        moderation_required=True
+                    )
+                    db.add(group)
+                    db.flush()
+                    groups_created += 1
+
+                # Add teacher as member (teacher role) if not already
+                existing_member = db.query(ChatGroupMember).filter(
+                    ChatGroupMember.group_id == group.id,
+                    ChatGroupMember.user_id == user.id
+                ).first()
+                if not existing_member:
+                    teacher_member = ChatGroupMember(
+                        group_id=group.id,
+                        user_id=user.id,
+                        role="teacher"
+                    )
+                    db.add(teacher_member)
+
+                # Add all enrolled students as members
+                enrollments = db.query(Enrollment).filter(
+                    Enrollment.offering_id == offering.id,
+                    Enrollment.status == "enrolled"
+                ).all()
+                for enrollment in enrollments:
+                    existing = db.query(ChatGroupMember).filter(
+                        ChatGroupMember.group_id == group.id,
+                        ChatGroupMember.user_id == enrollment.student_id
+                    ).first()
+                    if not existing:
+                        student_member = ChatGroupMember(
+                            group_id=group.id,
+                            user_id=enrollment.student_id,
+                            role="member"
+                        )
+                        db.add(student_member)
+
+            db.commit()
+
+        return groups_created
+
+    @staticmethod
     def get_group_by_id(db: Session, group_id: int):
         return db.query(ChatGroup).filter(
             ChatGroup.id == group_id

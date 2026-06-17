@@ -45,6 +45,10 @@ def get_my_groups(
     current_user = Depends(get_current_user)
 ):
     groups = ChatService.get_user_groups(db, current_user.id)
+    # Auto-create groups only if user has none (prevents DB hits on every 5s poll)
+    if not groups:
+        ChatService.sync_user_groups(db, current_user)
+        groups = ChatService.get_user_groups(db, current_user.id)
     data = [{
         "id": g.id,
         "name": g.name,

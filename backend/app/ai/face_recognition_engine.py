@@ -19,7 +19,7 @@ from app.models.attendance import FaceRecognitionLog
 
 # ─── Model Paths ────────────────────────────────────────────────────
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODELS_DIR = os.path.join(BASE_DIR, "models")
+MODELS_DIR = os.path.join(BASE_DIR, "face_models")
 
 LANDMARK_MODEL = os.path.join(MODELS_DIR, "shape_predictor_68_face_landmarks.dat")
 RECOGNITION_MODEL = os.path.join(MODELS_DIR, "dlib_face_recognition_resnet_model_v1.dat")
