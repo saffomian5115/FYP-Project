@@ -19,6 +19,6 @@ from app.models.communication import (
 )
 from app.models.ai_analytics import (
     StudentPerformanceScore,
-    ChatbotIntent, ChatbotConversation,
+    ChatbotConversation,
     ChatbotMessage, ChatbotFAQ
 )

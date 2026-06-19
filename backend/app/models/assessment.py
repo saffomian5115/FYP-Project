@@ -148,7 +148,7 @@ class AIQuiz(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     student_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    course_id = Column(Integer, ForeignKey("courses.id"), nullable=False)
+    course_id = Column(Integer, ForeignKey("courses.id"), nullable=True)
     topic = Column(String(200))
     difficulty = Column(
         Enum("easy", "medium", "hard"), nullable=False

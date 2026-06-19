@@ -9,7 +9,7 @@ import secrets
 import time
 
 from app.models.ai_analytics import (
-    ChatbotIntent, ChatbotConversation,
+    ChatbotConversation,
     ChatbotMessage, ChatbotFAQ
 )
 from app.ai.rag_service import RAGService

@@ -348,6 +348,19 @@ function StudentModal({ student, onClose, onSuccess }) {
   const [loading, setLoading] = useState(false);
   const set = (k, v) => setForm((p) => ({ ...p, [k]: v }));
 
+  const getErrorMessage = (err) => {
+    // Custom error from our backend
+    if (err.response?.data?.message) return err.response.data.message;
+    // FastAPI validation error (422) — extract field-level messages
+    if (err.response?.data?.detail) {
+      if (Array.isArray(err.response.data.detail)) {
+        return err.response.data.detail.map((d) => d.msg).join("; ");
+      }
+      return err.response.data.detail;
+    }
+    return "Operation failed";
+  };
+
   const handleSubmit = async () => {
     if (!form.full_name.trim() || !form.email.trim()) {
       toast.error("Name and email required");
@@ -360,16 +373,16 @@ function StudentModal({ student, onClose, onSuccess }) {
         gender: form.gender ? form.gender.toLowerCase() : undefined,
       };
       if (isEdit) {
-        await adminAPI.updateStudent(student.user_id, form);
+        await adminAPI.updateStudent(student.user_id, payload);
         toast.success("Student updated!");
       } else {
-        await adminAPI.createStudent(form);
+        await adminAPI.createStudent(payload);
         toast.success("Student created!");
       }
       onSuccess();
       onClose();
     } catch (err) {
-      toast.error(err.response?.data?.message || "Operation failed");
+      toast.error(getErrorMessage(err));
     } finally {
       setLoading(false);
     }

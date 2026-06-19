@@ -65,7 +65,7 @@ class FeePayment(Base):
     amount_paid = Column(DECIMAL(10, 2), nullable=False)
     payment_date = Column(TIMESTAMP, server_default=func.now())
     payment_method = Column(
-        Enum("cash", "bank_transfer", "credit_card", "online"),
+        Enum("cash", "bank_transfer", "credit_card", "online", "cheque"),
         nullable=False
     )
     reference_number = Column(String(100), nullable=True)

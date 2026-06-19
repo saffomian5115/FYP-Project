@@ -37,22 +37,6 @@ class StudentPerformanceScore(Base):
     semester = relationship("Semester")
 
 
-class ChatbotIntent(Base):
-    __tablename__ = "chatbot_intents"
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    intent_name = Column(String(100), unique=True, nullable=False)
-    description = Column(Text)
-    category = Column(String(50))
-    example_queries = Column(JSON)
-    response_template = Column(Text)
-    requires_auth = Column(Boolean, default=True)
-    is_active = Column(Boolean, default=True)
-    created_at = Column(TIMESTAMP, server_default=func.now())
-    updated_at = Column(TIMESTAMP, server_default=func.now(),
-                        onupdate=func.now())
-
-
 class ChatbotConversation(Base):
     __tablename__ = "chatbot_conversations"
 
@@ -85,17 +69,14 @@ class ChatbotMessage(Base):
     )
     sender = Column(Enum("student", "bot"), nullable=False)
     message = Column(Text, nullable=False)
-    intent_id = Column(
-        Integer, ForeignKey("chatbot_intents.id"), nullable=True
-    )
+    intent_id = Column(Integer, nullable=True)
     confidence = Column(DECIMAL(4, 3), nullable=True)
     timestamp = Column(TIMESTAMP, server_default=func.now())
     response_time_ms = Column(Integer, nullable=True)
-    message_metadata = Column(JSON, nullable=True)
+    message_metadata = Column("metadata", JSON, nullable=True)
 
     # Relationships
     conversation = relationship("ChatbotConversation", back_populates="messages")
-    intent = relationship("ChatbotIntent")
 
 
 class ChatbotFAQ(Base):
