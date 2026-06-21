@@ -85,29 +85,6 @@ def verify_face(
     }, "Face verified and attendance logged")
 
 
-@router.post("/ai-quiz/generate-ollama")
-async def generate_quiz_ollama(
-    course_id: int,
-    topic: str,
-    difficulty: str,
-    num_questions: int = 5,
-    db: Session = Depends(get_db),
-    current_user = Depends(get_current_user)
-):
-    from app.services.ai_service import AIQuizOllamaService
-    result, error = await AIQuizOllamaService.generate_with_ollama(
-        db=db,
-        student_id=current_user.id,
-        course_id=course_id,
-        topic=topic,
-        difficulty=difficulty,
-        num_questions=num_questions
-    )
-    if error:
-        return error_response(error, "GENERATE_FAILED")
-
-    return success_response(result, "AI Quiz generated with Ollama")
-
 @router.post("/gate-attendance")
 def gate_attendance(
     request: GateAttendanceRequest,

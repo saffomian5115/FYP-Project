@@ -1,13 +1,8 @@
 from sqlalchemy.orm import Session
 from app.ai.analytics_engine import AnalyticsEngine
-from app.ai.chatbot_engine import ChatbotEngine
-from app.ai.face_recognition_engine import FaceRecognitionEngine
-from app.ai.ollama_service import OllamaService
 from app.models.ai_analytics import (
     StudentPerformanceScore, ChatbotFAQ
 )
-from app.models.enrollment import CourseOffering
-from app.models.assessment import AIQuiz
 
 
 class AnalyticsService:
@@ -89,50 +84,10 @@ class FAQService:
 
     @staticmethod
     def search(db: Session, query: str):
-        return ChatbotEngine.search_faqs(db, query)
+        """Search FAQs by keyword (case-insensitive match on question/answer)."""
+        return db.query(ChatbotFAQ).filter(
+            ChatbotFAQ.is_active == True,
+            (ChatbotFAQ.question.ilike(f"%{query}%")) | (ChatbotFAQ.answer.ilike(f"%{query}%"))
+        ).order_by(ChatbotFAQ.view_count.desc()).all()
 
 
-class AIQuizOllamaService:
-
-    @staticmethod
-    async def generate_with_ollama(
-        db: Session,
-        student_id: int,
-        course_id: int,
-        topic: str,
-        difficulty: str,
-        num_questions: int = 5
-    ):
-        # Course name lao context ke liye
-        from app.models.academic import Course
-        course = db.query(Course).filter(Course.id == course_id).first()
-        course_context = course.name if course else ""
-
-        # Ollama se generate karo
-        questions = await OllamaService.generate_mcqs(
-            topic=topic,
-            difficulty=difficulty,
-            num_questions=num_questions,
-            course_context=course_context
-        )
-
-        # DB mein save karo
-        ai_quiz = AIQuiz(
-            student_id=student_id,
-            course_id=course_id,
-            topic=topic,
-            difficulty=difficulty,
-            questions_generated=questions
-        )
-        db.add(ai_quiz)
-        db.commit()
-        db.refresh(ai_quiz)
-
-        return {
-            "ai_quiz_id": ai_quiz.id,
-            "topic": topic,
-            "difficulty": difficulty,
-            "total_questions": len(questions),
-            "questions": questions,
-            "ollama_used": await OllamaService.is_available()
-        }, None

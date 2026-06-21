@@ -6,7 +6,6 @@ Reads submissions, runs checks, saves results back.
 """
 
 from sqlalchemy.orm import Session
-from sqlalchemy import text
 import logging
 
 from app.ai.plagiarism_engine import check_assignment_plagiarism
@@ -59,32 +58,57 @@ class PlagiarismService:
             f"({len(submissions)} submissions)"
         )
 
-        result = check_assignment_plagiarism(sub_input)
+        # Run plagiarism engine with per-submission error isolation
+        try:
+            result = check_assignment_plagiarism(sub_input)
+        except Exception as e:
+            logger.error(
+                f"[Plagiarism] Engine failed for assignment {assignment_id}: {e}"
+            )
+            return {
+                "assignment_id": assignment_id,
+                "error": f"Plagiarism engine encountered an error: {str(e)}. "
+                         f"Check that all submission files are valid and accessible.",
+            }
+
         per_sub = result["per_submission"]
 
-        # Save results back to each submission row
+        # Save results back to each submission row (isolate per-submission errors)
+        saved_count = 0
+        skipped = []
         for sub in submissions:
             ps = per_sub.get(sub.id)
             if not ps:
                 continue
 
-            sub.plagiarism_percentage = ps["max_similarity"]
-            sub.plagiarism_status     = "completed"
+            try:
+                sub.plagiarism_percentage = ps["max_similarity"]
+                sub.plagiarism_status     = "completed"
 
-            # Store full detail in plagiarism_data JSON column
-            sub.plagiarism_data = {
-                "max_similarity": ps["max_similarity"],
-                "risk_level":     ps["risk_level"],
-                "similar_to":     ps["similar_to"],
-                "method": "difflib+sentence-transformers",
-            }
+                # Store full detail in plagiarism_data JSON column
+                sub.plagiarism_data = {
+                    "max_similarity": ps["max_similarity"],
+                    "risk_level":     ps["risk_level"],
+                    "similar_to":     ps["similar_to"],
+                    "method": "difflib+sentence-transformers",
+                }
+                saved_count += 1
+            except Exception as e:
+                logger.warning(
+                    f"[Plagiarism] Failed to save result for submission {sub.id}: {e}"
+                )
+                skipped.append({
+                    "submission_id": sub.id,
+                    "error": str(e),
+                })
 
         db.commit()
 
         logger.info(
             f"[Plagiarism] Done — "
             f"{result['high_risk_pairs']} high-risk pairs, "
-            f"{result['medium_risk_pairs']} medium-risk pairs"
+            f"{result['medium_risk_pairs']} medium-risk pairs "
+            f"({saved_count} saved, {len(skipped)} skipped)"
         )
 
         return {
@@ -97,6 +121,8 @@ class PlagiarismService:
             "per_submission":      {
                 str(k): v for k, v in per_sub.items()
             },
+            "saved_count":          saved_count,
+            "skipped_submissions":  skipped,
         }
 
     @staticmethod
